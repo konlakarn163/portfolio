@@ -1,0 +1,143 @@
+{
+  "navbar": {
+    "brand": {
+      "part1": "Bas",
+      "part2": "Portfolio"
+    }
+  },
+  "hero": {
+    "name": "Konlakarn Buapian",
+    "title": "FRONTEND",
+    "subtitle": "DEVELOPER",
+    "highlight": "HI,",
+    "intro": "I'm {{name}}",
+    "description": "Frontend Expert specializing in high-performance, scalable web apps and pixel-perfect UI. I bridge complex REST APIs and secure Auth systems to deliver seamless, business-driven user experiences."
+  },
+  "home": {
+    "whyChoose": "Why Choose Me",
+    "whyChooseDesc": "I create clean, performant, and visually stunning web applications with React, Vite, Tailwind, and GSAP.",
+    "features": {
+      "performance": "Performance",
+      "performanceDesc": "Optimized UI with smooth animations.",
+      "scalability": "Scalability",
+      "scalabilityDesc": "Modular and maintainable codebase.",
+      "design": "Design",
+      "designDesc": "Modern and user-focused design systems."
+    }
+  },
+  "projects": {
+    "title": "Projects",
+    "desc": "Scroll to explore my projects horizontally",
+    "view": "View",
+    "list": [
+      {
+        "title": "E-Commerce Dashboard",
+        "desc": "Full-stack dashboard with charts, filters, and responsive layout.",
+        "tech": "React • Tailwind • Node"
+      },
+      {
+        "title": "Landing Page UI",
+        "desc": "Animated hero with GSAP, scroll-trigger sections, and modern UI.",
+        "tech": "React • Vite • GSAP"
+      },
+      {
+        "title": "Portfolio Website",
+        "desc": "Personal portfolio with dark mode, smooth scroll, and SEO.",
+        "tech": "Next.js • Tailwind"
+      },
+      {
+        "title": "Mobile App Mockup",
+        "desc": "UI mockup screens for a finance app with reusable components.",
+        "tech": "Figma • React Native"
+      },
+      {
+        "title": "Blog Platform",
+        "desc": "Markdown blog engine with authentication and CMS panel.",
+        "tech": "Next.js • Prisma • PostgreSQL"
+      },
+      {
+        "title": "Admin System",
+        "desc": "Role-based access system with forms, validation, and data table.",
+        "tech": "React • Express • SQL"
+      }
+    ]
+  },
+  "about": {
+    "title": "About Me",
+    "desc": "I am a Senior Frontend Developer with 6 years of experience in building high-performance and interactive web applications. My expertise is rooted in the React and Nuxt (v2,v3) ecosystems, with a focus on delivering pixel-perfect UIs and exceptional user experiences. Over the past year, I have strategically expanded my skill set into Fullstack development, utilizing Node.js (Express), SSMS (SQL Server), and MongoDB to build robust end-to-end solutions. Combined with modern state management like Zustand, I excel at bridging the gap between sophisticated frontend designs and solid backend architectures."
+  },
+  "contact": {
+    "title": "Let’s Work Together",
+    "desc": "Interested in collaborating? Get in touch and let’s build something amazing.",
+    "button": "Contact Me"
+  },
+
+  "skills": {
+    "title": "Technical Expertise",
+    "categories": {
+      "frontend": "Frontend Development",
+      "backend": "Backend & Databases",
+      "tools": "Tools & Design"
+    },
+    "items": {
+      "frontend": "React.js, Next.js, Nuxt.js (v2/v3), Vue.js, TypeScript, Zustand, Redux, Tailwind CSS, SCSS, HTML5",
+      "backend": "Node.js, Express.js, SSMS (SQL Server), MongoDB, Firebase, RESTful API Integration, Socket.io",
+      "tools": "Git, Postman, Figma, Adobe XD, GSAP (ScrollTrigger), i18next, Socket.io"
+    }
+  },
+  "experience": {
+    "title": "Work Experience",
+    "list": [
+      {
+        "company": "METRO CAT",
+        "role": "Fullstack & Frontend Developer",
+        "period": "2024 - Present",
+        "details": [
+          "Developing and maintaining full-stack web applications primarily using React and Node.js (Express).",
+          "Managing complex application states using Zustand to optimize frontend performance.",
+          "Designing and optimizing database queries in SSMS (SQL Server) for enterprise-level applications.",
+          "Efficiently integrating frontend components with backend APIs and contributing to scalable system architecture."
+        ]
+      },
+      {
+        "company": "Top Cloud Co., Ltd.",
+        "role": "Frontend Developer",
+        "period": "2024",
+        "details": [
+          "Developed high-performance landing pages for Tastematter, Sauce, and Maincourse.",
+          "Built and maintained web projects using Nuxt 3, Tailwind CSS, and Yup for robust data validation.",
+          "Integrated payment gateways including Stripe.js and Omise to support e-commerce transactions."
+        ]
+      },
+      {
+        "company": "C.I.Group Public Company Limited",
+        "role": "Fullstack & Frontend Developer",
+        "period": "2022 - 2024",
+        "details": [
+          "Enhanced internal API workflows and developed backend services using Node.js and MongoDB.",
+          "Engineered and maintained core web applications utilizing React.js, Redux, and Tailwind CSS.",
+          "Served as a QA Tester, creating comprehensive test scripts for Microsoft Dynamics 365 (AX)."
+        ]
+      },
+      {
+        "company": "Paiduay Technology",
+        "role": "Frontend Developer",
+        "period": "2019 - 2022",
+        "details": [
+          "QUEQ Team: Developed hospital queue management admin apps and reporting dashboards with Nuxt.js and Ant Design.",
+          "Daywork Team: Implemented real-time chat features using Firebase and WebSocket protocols.",
+          "Deeploy Team: Built online ticket booking platforms for National Park entrepreneurs using Nuxt.js and Element UI."
+        ]
+      },
+      {
+        "company": "Artisan Digital Asia",
+        "role": "Frontend Developer (Intern)",
+        "period": "2019",
+        "details": [
+          "Acquired fundamental knowledge in web architecture and UX/UI design principles.",
+          "Practiced using web development tools and understood real-world workflows in a digital agency environment."
+        ]
+      }
+    ]
+  }
+}
