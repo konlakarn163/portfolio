@@ -25,7 +25,7 @@ const SkillsSection = ({
       className="py-12 md:py-32 bg-transparent overflow-hidden w-full flex flex-col items-center"
     >
       <div className="px-6 mb-12 md:mb-20 w-full max-w-[1440px]">
-        <h2 className="text-4xl md:text-6xl lg:text-8xl font-header font-black text-center uppercase tracking-tighter leading-none">
+        <h2 className="text-4xl md:text-5xl font-header font-bold mb-20 text-center uppercase tracking-tight">
           {t("skills.title")}
         </h2>
       </div>
