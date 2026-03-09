@@ -30,7 +30,7 @@ export default function RightSocialRail({
           opacityTo={1}
           duration={2.5}
         >
-          <div className="relative w-[32vw] 2xl:w-[24vw] max-w-[320px] rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)] p-3 backdrop-blur">
+          <div className="relative w-[32vw] 2xl:w-[24vw] max-w-[320px] rounded-2xl border border-[color:var(--border)] dark:bg-[color:var(--surface)] p-3 dark:backdrop-blur">
             <ul className="flex flex-col gap-2">
               {links.map((l) => (
                 <li key={l.label}>
