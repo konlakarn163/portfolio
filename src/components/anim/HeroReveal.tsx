@@ -8,9 +8,11 @@ import {
 } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
+
 type HeroRevealProps = {
   children: ReactNode;
   className?: string;
@@ -57,7 +59,6 @@ export default function HeroReveal({
       : children;
 
   useLayoutEffect(() => {
-
     const ctx = gsap.context(() => {
       const targetEl =
         target === "child" && childRef.current
@@ -66,29 +67,30 @@ export default function HeroReveal({
 
       if (!targetEl) return;
 
-      gsap.fromTo(
-        targetEl,
-        { scale: scaleFrom, opacity: opacityFrom, y: yFrom },
-        {
-          scale: scaleTo,
-          opacity: 1,
-          y: 0,
-          duration,
-          delay,
-          immediateRender: false,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: wrapRef.current,
-            start,
-            toggleActions: once
-              ? "play none none none"
-              : "play none none reverse",
-          },
-        }
-      );
+      gsap.set(targetEl, { 
+        scale: scaleFrom, 
+        opacity: opacityFrom, 
+        y: yFrom 
+      });
+
+      gsap.to(targetEl, {
+        scale: scaleTo,
+        opacity: 1,
+        y: 0,
+        duration,
+        delay,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: wrapRef.current,
+          start,
+          toggleActions: once
+            ? "play none none none"
+            : "play none none reverse",
+        },
+      });
 
       if (parallax > 0) {
-        gsap.to(targetEl, {
+        gsap.to(wrapRef.current, {
           yPercent: -Math.abs(parallax),
           ease: "none",
           scrollTrigger: {
@@ -102,18 +104,7 @@ export default function HeroReveal({
     }, wrapRef);
 
     return () => ctx.revert();
-  }, [
-    target,
-    scaleFrom,
-    scaleTo,
-    yFrom,
-    opacityFrom,
-    duration,
-    delay,
-    start,
-    once,
-    parallax,
-  ]);
+  }, [target, scaleFrom, scaleTo, yFrom, opacityFrom, duration, delay, start, once, parallax]);
 
   return (
     <div ref={wrapRef} className={className}>
