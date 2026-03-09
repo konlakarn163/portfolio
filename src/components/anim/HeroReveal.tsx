@@ -8,7 +8,9 @@ import {
 } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 type HeroRevealProps = {
   children: ReactNode;
   className?: string;
@@ -55,7 +57,6 @@ export default function HeroReveal({
       : children;
 
   useLayoutEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
       const targetEl =
