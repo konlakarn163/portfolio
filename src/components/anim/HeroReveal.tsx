@@ -75,6 +75,7 @@ export default function HeroReveal({
           y: 0,
           duration,
           delay,
+          immediateRender: false,
           ease: "power3.out",
           scrollTrigger: {
             trigger: wrapRef.current,
