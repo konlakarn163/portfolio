@@ -1,4 +1,4 @@
-// InfiniteHorizontalScroll.tsx
+
 import Marquee from "react-fast-marquee";
 
 type Props = {

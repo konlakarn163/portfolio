@@ -7,11 +7,11 @@
   },
   "hero": {
     "name": "Konlakarn Buapian",
-    "title": "FRONTEND",
+    "title": "FULLSTACK",
     "subtitle": "DEVELOPER",
     "highlight": "HI,",
     "intro": "I'm {{name}}",
-    "description": "Frontend Expert specializing in high-performance, scalable web apps and pixel-perfect UI. I bridge complex REST APIs and secure Auth systems to deliver seamless, business-driven user experiences."
+    "description": "A Fullstack Developer with a 6-year foundation in Frontend expertise. I specialize in building end-to-end systems—from architecting complex backend logic and security to delivering pixel-perfect, high-performance UIs that drive real business value."
   },
   "home": {
     "whyChoose": "Why Choose Me",
@@ -63,8 +63,11 @@
     ]
   },
   "about": {
+    "hero_1": "Senior",
+    "hero_2": "Fullstack",
+    "hero_3": "Developer",
     "title": "About Me",
-    "desc": "I am a Senior Frontend Developer with 6 years of experience in building high-performance and interactive web applications. My expertise is rooted in the React and Nuxt (v2,v3) ecosystems, with a focus on delivering pixel-perfect UIs and exceptional user experiences. Over the past year, I have strategically expanded my skill set into Fullstack development, utilizing Node.js (Express), SSMS (SQL Server), and MongoDB to build robust end-to-end solutions. Combined with modern state management like Zustand, I excel at bridging the gap between sophisticated frontend designs and solid backend architectures."
+    "desc": "I built my career as a Frontend Developer over the last 6 years, which gave me a deep obsession with User Experience and pixel-perfect details. To become a truly end-to-end developer, I’ve spent the past year diving deep into the backend with Node.js, SQL Server, and MongoDB. Today, I enjoy managing the big picture—bridging the gap between complex UI designs and stable, scalable backend architectures."
   },
   "contact": {
     "title": "Let’s Work Together",

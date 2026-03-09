@@ -1,6 +1,7 @@
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import LanguageSwitcher from "./LanguageSwitcher";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
   const navRef = useRef<HTMLElement>(null);
@@ -26,10 +27,13 @@ export default function Navbar() {
     <header ref={navRef} className="fixed top-0 z-[999] w-full bg-base-dark">
       <div className="mx-auto container px-4 h-16 flex items-center justify-between">
         <div className="font-extrabold text-lg space-x-1 font-header">
-          <span className="tracking-widest text-base-orange">Bas</span>
+          <span className="tracking-widest text-cyan-500">Bas</span>
           <span className="text-base-white">Portfolio</span>
         </div>
-        <LanguageSwitcher />
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <LanguageSwitcher />
+        </div>
       </div>
     </header>
   );

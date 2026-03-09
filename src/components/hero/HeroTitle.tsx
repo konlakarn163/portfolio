@@ -14,7 +14,7 @@ export default function HeroTitle({
   className = "",
 }: HeroTitleProps) {
   const { t } = useTranslation();
-  const displayTitle = title || t('hero.title', 'FRONTEND');
+  const displayTitle = title || t('hero.title', 'FULLSTACK');
   const displaySubtitle = subtitle || t('hero.subtitle', 'DEVELOPER');
 
   return (

@@ -1,49 +1,39 @@
 import React, { useLayoutEffect, useRef, ReactNode } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 gsap.registerPlugin(ScrollTrigger);
 
 type ScaleInProps = {
   children: ReactNode;
   className?: string;
-
   duration?: number;
   delay?: number;
   ease?: string;
-
   triggerStart?: string;
   toggleActions?: string;
-
   transformOrigin?: string;
-
   opacityFrom?: number;
   opacityTo?: number;
   scaleFrom?: number;
   scaleTo?: number;
-
   scrub?: boolean | number;
-
   force3D?: boolean;
 };
 
 export default function ScaleIn({
   children,
   className = "",
-
   duration = 0.8,
   delay = 0,
   ease = "power3.out",
-
   triggerStart = "top 85%",
   toggleActions = "play none none reverse",
-
   transformOrigin = "center center",
-
   opacityFrom = 0,
   opacityTo = 1,
   scaleFrom = 0.9,
   scaleTo = 1,
-
   scrub = false,
   force3D = true,
 }: ScaleInProps) {
@@ -54,21 +44,20 @@ export default function ScaleIn({
       const target = el.current;
       if (!target) return;
 
-      // โปรโมตเลเยอร์เพื่อให้ composited (ช่วยความลื่น)
       gsap.set(target, {
         willChange: "transform, opacity",
-        force3D, // translateZ(0) ภายใน gsap
+        force3D,
         transformOrigin,
       });
 
-      const baseFrom = { scale: scaleFrom, autoAlpha: opacityFrom, y: 0 }; // autoAlpha = opacity+visibility
+      const baseFrom = { scale: scaleFrom, autoAlpha: opacityFrom, y: 0 };
       const baseTo = {
         scale: scaleTo,
         autoAlpha: opacityTo,
         duration,
         delay,
         ease,
-        onComplete: () => gsap.set(target, { willChange: "auto" }), // เคลียร์เมื่อจบ
+        onComplete: () => gsap.set(target, { willChange: "auto" }),
       };
 
       if (scrub) {
@@ -78,7 +67,7 @@ export default function ScaleIn({
             trigger: target,
             start: triggerStart,
             end: "bottom top",
-            scrub: typeof scrub === "number" ? scrub : 0.5, // smoothing
+            scrub: typeof scrub === "number" ? scrub : 0.5,
           },
         });
       } else {

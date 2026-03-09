@@ -18,21 +18,21 @@ type Position =
   | "top-right"
   | "bottom-left"
   | "bottom-right"
-  | "custom"; // ไม่ใส่คลาสตำแหน่งให้ (ใช้ className เอง)
+  | "custom";
 
 type TextAnimatedProps = {
-  children: ReactNode; // ส่ง <p>FRONTEND</p><p>DEVELOPER</p> ได้เลย
-  className?: string; // คลาสของ wrapper
-  position?: Position; // เลือกตำแหน่งวาง
-  topClass?: string; // ใช้กับ *-top-* (เช่น top-[clamp(1rem,10vw,4rem)])
-  direction?: Direction; // ทิศที่สไลด์เข้า
-  unit?: Unit; // all / word / char
-  distance?: number; // px ที่เริ่ม offset
-  duration?: number; // วินาที
-  delay?: number; // วินาที
-  stagger?: number; // เวลาหน่วงระหว่างตัวอักษร/คำ
-  once?: boolean; // true = เล่นครั้งเดียว
-  ease?: string; // gsap ease
+  children: ReactNode;
+  className?: string;
+  position?: Position;
+  topClass?: string;
+  direction?: Direction;
+  unit?: Unit;
+  distance?: number;
+  duration?: number;
+  delay?: number;
+  stagger?: number;
+  once?: boolean;
+  ease?: string;
 };
 
 export default function TextAnimated({
@@ -51,7 +51,6 @@ export default function TextAnimated({
 }: TextAnimatedProps) {
   const wrapRef = useRef<HTMLDivElement>(null);
 
-  // สร้างคลาสตำแหน่งอัตโนมัติ
   const posClass = (() => {
     if (position === "custom") return "";
     const base = "absolute";
@@ -72,10 +71,8 @@ export default function TextAnimated({
     if (!root) return;
 
     const ctx = gsap.context(() => {
-      // เลือกทุก element ลูกระดับแรกเพื่ออนิเมต (เช่น <p>FRONTEND</p>, <p>DEVELOPER</p>)
       const lines = Array.from(root.children) as HTMLElement[];
 
-      // ช่วย map ทิศเป็นแกน/ระยะเริ่มต้น
       const fromVars = (() => {
         switch (direction) {
           case "up":
@@ -86,10 +83,11 @@ export default function TextAnimated({
             return { x: distance };
           case "right":
             return { x: -distance };
+          default:
+            return { y: distance };
         }
       })();
 
-      // ถ้า unit = all → ไม่ต้อง split, เล่นรวมทั้งบล็อก
       if (unit === "all") {
         gsap.from(lines, {
           ...fromVars,
@@ -97,17 +95,16 @@ export default function TextAnimated({
           duration,
           delay,
           ease,
-          stagger: 0.08, // แต่ละบรรทัดหน่วงเล็กน้อย
+          stagger: 0.08,
           clearProps: "all",
         });
         return;
       }
 
-      // unit = word / char → split เป็น span แล้วอนิเมตแบบ stagger
       const createdSpans: HTMLElement[] = [];
 
       const splitWords = (text: string) =>
-        text.split(/(\s+)/).map((t) => (t === " " ? "\u00A0" : t)); // เก็บช่องว่าง
+        text.split(/(\s+)/).map((t) => (t === " " ? "\u00A0" : t));
 
       const splitChars = (text: string) =>
         Array.from(text).map((c) => (c === " " ? "\u00A0" : c));
@@ -116,20 +113,19 @@ export default function TextAnimated({
         const text = el.textContent ?? "";
         const tokens = unit === "word" ? splitWords(text) : splitChars(text);
 
-        // สร้าง spans
-        el.textContent = ""; // เคลียร์ก่อน
+        el.textContent = "";
         tokens.forEach((tk) => {
           const span = document.createElement("span");
           span.textContent = tk;
-          // inline-block เพื่อให้ transform ได้สวย และให้ wrapping ธรรมชาติ
           span.style.display = "inline-block";
           span.style.willChange = "transform, opacity";
           el.appendChild(span);
-          if (tk.trim() !== "" || unit === "char") createdSpans.push(span);
+          if (tk.trim() !== "" || unit === "char") {
+            createdSpans.push(span);
+          }
         });
       });
 
-      // เล่นอนิเมชัน
       gsap.from(createdSpans, {
         ...fromVars,
         opacity: 0,
@@ -139,21 +135,13 @@ export default function TextAnimated({
         stagger,
         clearProps: "all",
       });
-
-      // ถ้าอยากให้เล่นครั้งเดียวจริง ๆ (เวลาเลื่อนกลับ) ให้ freeze ค่าไว้โดยไม่ reverse
-      if (once) {
-        // ไม่มี ScrollTrigger ที่นี่ เพราะตำแหน่งหัวเรื่องมักอยู่บนจออยู่แล้ว
-        // ถ้าต้องการเล่นตอนเข้าจอเท่านั้น เพิ่ม observer/ScrollTrigger ตามต้องการ
-      }
     }, wrapRef);
 
     return () => ctx.revert();
   }, [direction, unit, distance, duration, delay, stagger, ease, once]);
 
-  // ให้ children ผ่านโดยไม่แตะโครงสร้าง (เราจะแทรก spans ตอน runtime)
   const safeChildren = isValidElement(children)
     ? cloneElement(children as ReactElement, {
-        // รวม className เดิมของลูก
         className: (children as any).props?.className ?? "",
       })
     : children;

@@ -1,5 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { skillGroups } from "@/constant/skills";
+import { SkillMarquee } from "../anim/SkillMarquee";
 
 const SkillsSection = ({
   innerRef,
@@ -8,45 +10,56 @@ const SkillsSection = ({
 }) => {
   const { t } = useTranslation();
 
-  const skillGroups = [
-    {
-      title: t("skills.categories.frontend"),
-      skills: "React.js, Nuxt.js, Vue.js, Tailwind CSS, TypeScript, Redux, Zustand, MUI",
-      color: "text-cyan-400",
-    },
-    {
-      title: t("skills.categories.backend"),
-      skills: "Node.js, Express.js, SSMS (SQL Server), MongoDB, Firebase, Socket.io",
-      color: "text-indigo-400",
-    },
-    {
-      title: t("skills.categories.tools"),
-      skills: "Git, Postman, Figma, Adobe XD, RESTful API",
-      color: "text-pink-400",
-    },
+  const getArray = (s: string) => s.split(", ");
+  const formatText = (s: string) => s.split(", ").join(" • ");
+
+  const colors = [
+    { text: "text-cyan-400/80 dark:text-cyan-400/30", accent: "text-cyan-400", bg: "bg-cyan-400" },
+    { text: "text-indigo-400/80 dark:text-indigo-400/30", accent: "text-indigo-400", bg: "bg-indigo-400" },
+    { text: "text-pink-400 dark:text-pink-400/30", accent: "text-pink-400", bg: "bg-pink-400" },
   ];
 
   return (
-    <section ref={innerRef} className="py-24 px-6 overflow-hidden w-full">
-      <div className="max-w-6xl mx-auto font-body">
-        <h2 className="text-4xl md:text-5xl font-header font-bold mb-16 text-center uppercase">
+    <section
+      ref={innerRef}
+      className="py-12 md:py-32 bg-transparent overflow-hidden w-full flex flex-col items-center"
+    >
+      <div className="px-6 mb-12 md:mb-20 w-full max-w-[1440px]">
+        <h2 className="text-4xl md:text-6xl lg:text-8xl font-header font-black text-center uppercase tracking-tighter leading-none">
           {t("skills.title")}
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {skillGroups.map((group, i) => (
-            <div
-              key={i}
-              className="skill-card p-8 rounded-3xl bg-white/[0.03] ring-1 ring-white/10 hover:bg-white/[0.08] hover:ring-white/30 transition-shadow duration-300"
-            >
-              <h3 className={`text-xl font-bold mb-4 ${group.color}`}>
-                {group.title}
-              </h3>
-              <p className="text-white/70 leading-relaxed text-lg">
-                {group.skills}
-              </p>
+      </div>
+
+      <div className="flex flex-col w-full border-t border-white/5">
+        {skillGroups.map((group, i) => {
+          const color = colors[i % colors.length];
+          const isEven = i % 2 === 1;
+
+          return (
+            <div key={i} className="relative w-full group">
+              <div
+                className={`absolute top-1 md:top-2 z-10 opacity-40 group-hover:opacity-100 transition-all duration-500
+                ${isEven ? "right-4 md:right-12 text-right" : "left-4 md:left-12"}`}
+              >
+                <span className="block text-[10px] md:text-[14px] font-mono uppercase tracking-[0.3em] mb-1">
+                  {t(group.key)}
+                </span>
+                <div
+                  className={`h-[1px] md:h-[2px] w-0 group-hover:w-full transition-all duration-500 ease-out ${color.bg} ${isEven ? "ml-auto" : ""}`}
+                />
+              </div>
+
+              <SkillMarquee
+                text={formatText(group.skills)}
+                skillsArray={getArray(group.skills)}
+                reverse={isEven}
+                speed={isEven ? 45 : 35}
+                className={color.text}
+                accentColor={color.accent}
+              />
             </div>
-          ))}
-        </div>
+          );
+        })}
       </div>
     </section>
   );

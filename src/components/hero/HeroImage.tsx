@@ -21,9 +21,9 @@ export default function HeroImage({
       opacityFrom={1}
     >
       <img
-        src="/assets/images/image-cover.png"
-        alt="Cover"
-        className="sm:w-[clamp(150px,60vw,600px)] h-[580px] sm:h-auto max-w-[unset] brightness-[0.85]"
+        src={src}
+        alt={alt}
+        className={`pointer-events-none w-[82vw] sm:w-[56vw] md:w-[46vw] lg:w-[35vw] 2xl:w-[550px] max-w-[560px] max-h-[84svh] object-contain object-bottom brightness-100 dark:brightness-[0.85] ${className}`}
       />
     </HeroReveal>
   );

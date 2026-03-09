@@ -21,7 +21,7 @@ export default function PanelHero() {
       label: "GitHub",
       href: "https://github.com/konlakarn163",
       icon: <SiGithub size={20} />,
-      colorClass: "text-white/90",
+      colorClass: "text-[color:var(--fg)]",
     },
     {
       label: "LinkedIn",
@@ -44,18 +44,19 @@ export default function PanelHero() {
   ];
 
   return (
-    <div className="w-full h-screen container mx-auto flex items-center justify-center relative font-header">
+    <div className="w-full px-6 min-h-[100svh] container mx-auto flex items-center justify-center relative font-header pt-16 pb-24 md:pb-0">
       <HeroTitle />
       <LeftIntro
-        name={t('hero.name')}
-        introText={t('hero.intro', { name: t('hero.name') })}
-        highlightText={t('hero.highlight')}
-        highlightClass="text-orange-500"
-        description={t('hero.description')}
+        name={t("hero.name")}
+        introText={t("hero.intro", { name: t("hero.name") })}
+        highlightText={t("hero.highlight")}
+        highlightClass="text-cyan-500"
+        description={t("hero.description")}
         className=""
       />
       <RightSocialRail links={links} />
       <HeroImage />
+     
     </div>
   );
 }

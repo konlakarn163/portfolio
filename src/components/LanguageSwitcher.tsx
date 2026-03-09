@@ -29,20 +29,20 @@ export default function LanguageSwitcher() {
     <div className="flex gap-2">
       <button
         onClick={() => changeLanguage('en')}
-        className={`px-2 py-1 rounded text-sm font-medium transition-colors duration-200 ${
+        className={`px-2 py-1 rounded text-sm font-medium border transition-colors duration-200 ${
           i18n.language === 'en'
-            ? 'bg-white text-black'
-            : 'bg-white/20 text-white hover:bg-white/40'
+            ? 'bg-[color:var(--accent)] text-[color:var(--accent-fg)] border-transparent'
+            : 'bg-[color:var(--surface)] text-[color:var(--fg)] border-[color:var(--border)] hover:bg-[color:var(--surface-2)]'
         }`}
       >
         EN
       </button>
       <button
         onClick={() => changeLanguage('th')}
-        className={`px-2 py-1 rounded text-sm font-medium transition-colors duration-200 ${
+        className={`px-2 py-1 rounded text-sm font-medium border transition-colors duration-200 ${
           i18n.language === 'th'
-            ? 'bg-white text-black'
-            : 'bg-white/20 text-white hover:bg-white/40'
+            ? 'bg-[color:var(--accent)] text-[color:var(--accent-fg)] border-transparent'
+            : 'bg-[color:var(--surface)] text-[color:var(--fg)] border-[color:var(--border)] hover:bg-[color:var(--surface-2)]'
         }`}
       >
         TH

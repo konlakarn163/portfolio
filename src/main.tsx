@@ -5,6 +5,9 @@ import App from "./App";
 import "./styles/index.css";
 import "./styles/anim.css";
 import "./i18n"; // initialize translations
+import { initTheme } from "./theme";
+
+initTheme();
 
 createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

@@ -3,16 +3,58 @@
 @tailwind utilities;
 
 :root {
-  --dark-theme: #0a0a0a;
+  /* Design tokens (light defaults). */
+  --dark-theme: #f8fafc;
   --orange-color: #ff5722;
-  --white-color: #f7f7f7;
+  --white-color: #0b1220;
   --violet-color: #673ab7;
   --yellow-color: #ffeb3b;
+
+  --bg: #f8fafc;
+  --bg-alt: #f1f5f9;
+  --surface: rgba(15, 23, 42, 0.06);
+  --surface-2: rgba(15, 23, 42, 0.1);
+  --fg: #0b1220;
+  --fg-muted: rgba(15, 23, 42, 0.65);
+  --border: rgba(15, 23, 42, 0.12);
+  --accent: #06b6d4;
+  --accent-fg: #001018;
+}
+
+.dark {
+  --dark-theme: #0a0a0a;
+  --white-color: #f7f7f7;
+
+  --bg: #0a0a0a;
+  --bg-alt: #0f0f0f;
+  --surface: rgba(255, 255, 255, 0.06);
+  --surface-2: rgba(255, 255, 255, 0.1);
+  --fg: #f7f7f7;
+  --fg-muted: rgba(255, 255, 255, 0.62);
+  --border: rgba(255, 255, 255, 0.12);
+  --accent: #06b6d4;
+  --accent-fg: #001018;
 }
 
 html {
   scroll-behavior: smooth;
-  @apply bg-base-dark text-white;
+  background-color: var(--bg);
+  color: var(--fg);
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--fg);
+  @apply font-body overflow-x-hidden selection:bg-cyan-500/30;
+}
+
+a {
+  color: inherit;
 }
 
 .michroma-regular {

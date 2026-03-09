@@ -12,16 +12,15 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 type HeroRevealProps = {
   children: ReactNode;
   className?: string;
-  /** จะอนิเมตตัว wrapper เอง หรืออนิเมต child โดยตรง */
   target?: "child" | "self";
   scaleFrom?: number;
   scaleTo?: number;
-  yFrom?: number; // offset แรกเริ่ม (px)
+  yFrom?: number;
   opacityFrom?: number;
-  duration?: number; // วินาที
-  delay?: number; // วินาที
-  start?: string; // ScrollTrigger start
-  once?: boolean; // เล่นครั้งเดียว
+  duration?: number;
+  delay?: number;
+  start?: string;
+  once?: boolean;
   parallax?: number;
 };
 
@@ -46,8 +45,9 @@ export default function HeroReveal({
     target === "child" && isValidElement(children)
       ? cloneElement(children as ReactElement<any>, {
           ref: (node: HTMLElement) => {
-            if (typeof (children as any).ref === "function")
+            if (typeof (children as any).ref === "function") {
               (children as any).ref(node);
+            }
             childRef.current = node;
           },
           className: [(children as any).props?.className ?? ""].join(" "),
@@ -84,6 +84,7 @@ export default function HeroReveal({
           },
         }
       );
+
       if (parallax > 0) {
         gsap.to(targetEl, {
           yPercent: -Math.abs(parallax),
