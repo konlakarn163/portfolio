@@ -11,7 +11,7 @@
     "subtitle": "DEVELOPER",
     "highlight": "สวัสดีครับ,",
     "intro": "ผมชื่อ {{name}}",
-    "description": "นักพัฒนา Fullstack ที่มีพื้นฐานความเชี่ยวชาญด้าน Frontend มากว่า 6 ปี มุ่งเน้นการสร้างระบบที่ทำงานได้ครบวงจร ตั้งแต่การวางโครงสร้าง Backend ที่ซับซ้อนและระบบความปลอดภัย ไปจนถึงการส่งมอบ UI ที่แม่นยำและลื่นไหล เพื่อตอบโจทย์ธุรกิจอย่างมีประสิทธิภาพ"
+    "description": "Fullstack Developer ที่มีพื้นฐานความเชี่ยวชาญด้าน Frontend มากว่า 6 ปี มุ่งเน้นการสร้างระบบที่ทำงานได้ครบวงจร ตั้งแต่การวางโครงสร้าง Backend ที่ซับซ้อนและระบบความปลอดภัย ไปจนถึงการส่งมอบ UI ที่แม่นยำและลื่นไหล เพื่อตอบโจทย์ธุรกิจอย่างมีประสิทธิภาพ"
   },
   "home": {
     "whyChoose": "ทำไมต้อเลือกผม",
@@ -89,7 +89,7 @@
       },
       {
         "company": "Top Cloud Co., Ltd.",
-        "role": "นักพัฒนา Frontend",
+        "role": "Frontend Developer",
         "period": "2567",
         "details": [
           "พัฒนา Landing Page สำหรับโปรเจกต์ Tastematter, Sauce และ Maincourse โดยเน้นความสวยงามและการใช้งานที่ลื่นไหล",
@@ -99,7 +99,7 @@
       },
       {
         "company": "C.I.Group Public Company Limited",
-        "role": "นักพัฒนา Fullstack และ Frontend",
+        "role": "Fullstack & Frontend Developer",
         "period": "2565 - 2567",
         "details": [
           "พัฒนา Backend Services และปรับปรุง API Workflows สำหรับระบบภายในด้วย Node.js และ MongoDB",
@@ -109,7 +109,7 @@
       },
       {
         "company": "Paiduay Technology",
-        "role": "นักพัฒนา Frontend",
+        "role": "Frontend Developer",
         "period": "2562 - 2565",
         "details": [
           "ทีม QUEQ: พัฒนา Admin Web App สำหรับจัดการคิวโรงพยาบาลและแดชบอร์ดรายงานผลด้วย Nuxt.js และ Ant Design",
