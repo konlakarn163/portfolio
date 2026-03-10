@@ -76,7 +76,7 @@ const SkillsSection = ({
     >
       <div ref={containerRef} className="w-full flex flex-col items-center">
         <div className="px-6 mb-12 md:mb-20 w-full max-w-[1440px]">
-          <h2 className="text-4xl md:text-5xl font-header font-bold mb-10 md:mb-20 text-center uppercase tracking-tight">
+          <h2 className="hover-scale text-4xl md:text-5xl font-header font-bold mb-10 md:mb-20 text-center uppercase tracking-tight">
             {t("skills.title")}
           </h2>
         </div>
@@ -120,7 +120,7 @@ const SkillsSection = ({
               return (
                 <div
                   key={`desktop-${i}`}
-                  className="relative w-full group desktop-row border-b border-white/5"
+                  className="hover-scale relative w-full group desktop-row border-b border-white/5"
                 >
                   <div
                     className={`absolute top-2 z-10 opacity-40 group-hover:opacity-100 transition-all duration-500

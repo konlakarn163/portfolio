@@ -28,10 +28,10 @@ export default function HeroTitle({
       stagger={0.06}
     >
       <>
-        <p className="font-bold text-center leading-tight text-[clamp(2rem,10vw,8rem)] font-header">
+        <p className="hover-scale font-bold text-center leading-tight text-[clamp(2rem,10vw,8rem)] font-header text-slate-700 dark:text-white">
           {displayTitle}
         </p>
-        <p className="font-bold text-center leading-tight text-[clamp(1rem,10vw,4rem)]">
+        <p className="font-bold text-center leading-tight text-[clamp(1rem,10vw,4rem)] text-slate-700 dark:text-white">
           {displaySubtitle}
         </p>
       </>

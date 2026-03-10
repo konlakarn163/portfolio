@@ -1,26 +1,24 @@
-# Portfolio (React + Vite + Tailwind + GSAP)
+# Portfolio 2026 - Frontend Expert
 
-My Link https://portfolio-ivory-six-fjdff3kq3q.vercel.app/
+Modern, High-Performance Personal Portfolio built with **React**, **GSAP**, and **Tailwind CSS**. Featuring smooth scrolling, custom cursor interactions, and pixel-perfect UI.
 
-This repository contains a personal portfolio application built with React, Vite, Tailwind CSS and GSAP. Recent enhancements include:
+## 🔗 Live Demo
 
-- **Multilingual UI**: English / Thai toggling using `react-i18next` with language persistence.
-- **Animated transitions**: GSAP powers a smooth horizontal scroll on the projects section, navbar entry animation and a fade effect when the language is switched.
-- **Modern stack**: React 18, Vite, TypeScript, Tailwind CSS, GSAP animations.
+**Check out the live site:** [portfolio-ivory-six.vercel.app](https://portfolio-ivory-six-fjdff3kq3q.vercel.app/)
 
-## Getting started
+## 🚀 Tech Stack
 
-1. Install dependencies (new i18n packages are included):
+- **Framework:** React 18 (Vite)
+- **Styling:** Tailwind CSS
+- **Animation:** - GSAP (GreenSock Animation Platform)
+  - GSAP ScrollSmoother (Premium Feel)
+  - GSAP ScrollTrigger
+- **Icons:** Lucide React / React Icons
+- **I18n:** react-i18next
 
-```bash
-npm install
-# or yarn install
-```
+## ✨ Key Features
 
-2. Start the development server:
-
-```bash
-npm run dev
-```
-
-3. Open http://localhost:5173 (or the port shown) and use the language buttons in the navbar to switch between English and Thai.
+- **Smooth Scrolling:** Integrated with GSAP ScrollSmoother for a high-end browsing experience.
+- **Dynamic Mouse Follower:** Custom cursor with `mix-blend-difference` and context-aware scaling.
+- **Responsive Design:** Mobile-first approach with optimized layouts for all devices.
+- **Hero Animations:** Advanced GSAP timelines and reveal effects.

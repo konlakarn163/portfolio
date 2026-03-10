@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 :root {
-  /* Design tokens (light defaults). */
   --dark-theme: #f8fafc;
   --orange-color: #ff5722;
   --white-color: #0b1220;

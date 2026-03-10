@@ -27,8 +27,8 @@ export default function LeftIntro({
         opacityTo={1}
         duration={2.5}
       >
-        <div className="w-full md:w-[30vw] 2xl:w-[25vw] md:max-w-[520px]">
-          <p className="text-left text-xl sm:text-2xl font-semibold tracking-widest">
+        <div className="w-full md:w-[30vw] sm:max-h-[200px] lg:max-h-[unset] 2xl:w-[25vw] md:max-w-[520px]">
+          <p className="hover-scale text-left text-xl  lg:text-2xl font-semibold tracking-widest text-slate-700 dark:text-white">
             <span className={` ${highlightClass}`}>{highlightText} </span>
             {introText || `I\'m ${name}`}
           </p>

@@ -38,7 +38,7 @@ export default function ScrollBadge() {
   return (
     <div
       ref={badgeWrapperRef}
-      className="absolute bottom-22 md:bottom-10 left-2 md:left-10 z-[9999] cursor-pointer pointer-events-auto block opacity-0 scale-50 transition-transform hover:scale-110 active:scale-95"
+      className="hover-scale absolute bottom-22 md:bottom-10 left-2 md:left-10 z-[9999] cursor-pointer pointer-events-auto block opacity-0 scale-50 transition-transform hover:scale-110 active:scale-95"
       onClick={scrollToTop}
     >
       <div className="relative flex items-center justify-center">

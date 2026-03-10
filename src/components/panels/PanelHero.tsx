@@ -60,7 +60,7 @@ export default function PanelHero() {
   return (
     <div className="w-full px-6 min-h-[100svh] container mx-auto flex items-center justify-center relative font-header pt-16 pb-24 md:pb-0">
       <HeroTitle />
-      
+
       <div onClick={toggleImage} className="cursor-pointer z-20">
         <LeftIntro
           name={t("hero.name")}
@@ -72,8 +72,8 @@ export default function PanelHero() {
         />
       </div>
 
-      <RightSocialRail links={links} className="z-40"/>
-      
+      <RightSocialRail links={links} className="z-40" />
+
       <div ref={imageRef} onClick={toggleImage} className="cursor-pointer z-30">
         <HeroImage />
       </div>
