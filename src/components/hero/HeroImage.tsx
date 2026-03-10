@@ -41,7 +41,7 @@ export default function HeroImage({
       });
 
       gsap.to(containerRef.current, {
-        yPercent: -5,
+        yPercent: 0,
         ease: "none",
         scrollTrigger: {
           trigger: containerRef.current,

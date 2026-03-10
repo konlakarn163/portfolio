@@ -2,7 +2,6 @@ import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useTranslation } from "react-i18next";
-import ScrollBadge from "../anim/ScrollBadge";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -69,7 +68,6 @@ export default function AboutSection() {
             {t("about.desc")}
           </p>
         </div>
-        <ScrollBadge/>
 
       </div>
     </section>

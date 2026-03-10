@@ -1,7 +1,7 @@
 import ScaleIn from "../anim/ScaleIn";
 type LeftIntroProps = {
   name: string;
-  introText?: string; // full sentence such as "I'm Konlakarn"
+  introText?: string; 
   highlightText?: string;
   highlightClass?: string;
   description: string;
@@ -18,7 +18,7 @@ export default function LeftIntro({
 }: LeftIntroProps) {
   return (
     <div
-      className={`p-4 w-full md:w-auto sm:mt-32 md:mt-0 md:absolute md:left-0 md:top-2/3 md:-translate-y-1/2  ${className}`}
+      className={`p-4 w-full md:w-auto mt-32 min-[430px]:mt-0 md:mt-0 md:absolute md:left-0 md:top-2/3 md:-translate-y-1/2 ${className}`}
     >
       <ScaleIn
         scaleFrom={0.85}

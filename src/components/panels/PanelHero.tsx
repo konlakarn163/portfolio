@@ -4,7 +4,8 @@ import HeroTitle from "@/components/hero/HeroTitle";
 import LeftIntro from "@/components/hero/LeftIntro";
 import RightSocialRail from "@/components/hero/RightSocialRail";
 import HeroImage from "@/components/hero/HeroImage";
-import { ReactNode } from "react";
+import { ReactNode, useRef, useState } from "react";
+import gsap from "gsap";
 
 type SocialLink = {
   label: string;
@@ -15,6 +16,19 @@ type SocialLink = {
 
 export default function PanelHero() {
   const { t } = useTranslation();
+  const imageRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(true);
+
+  const toggleImage = () => {
+    if (!imageRef.current) return;
+
+    gsap.to(imageRef.current, {
+      opacity: isVisible ? 0 : 1,
+      duration: 0.5,
+      ease: "power2.inOut",
+      onComplete: () => setIsVisible(!isVisible),
+    });
+  };
 
   const links: SocialLink[] = [
     {
@@ -46,17 +60,23 @@ export default function PanelHero() {
   return (
     <div className="w-full px-6 min-h-[100svh] container mx-auto flex items-center justify-center relative font-header pt-16 pb-24 md:pb-0">
       <HeroTitle />
-      <LeftIntro
-        name={t("hero.name")}
-        introText={t("hero.intro", { name: t("hero.name") })}
-        highlightText={t("hero.highlight")}
-        highlightClass="text-cyan-500"
-        description={t("hero.description")}
-        className=""
-      />
-      <RightSocialRail links={links} />
-      <HeroImage />
-     
+      
+      <div onClick={toggleImage} className="cursor-pointer z-20">
+        <LeftIntro
+          name={t("hero.name")}
+          introText={t("hero.intro", { name: t("hero.name") })}
+          highlightText={t("hero.highlight")}
+          highlightClass="text-cyan-500"
+          description={t("hero.description")}
+          className=""
+        />
+      </div>
+
+      <RightSocialRail links={links} className="z-40"/>
+      
+      <div ref={imageRef} onClick={toggleImage} className="cursor-pointer z-30">
+        <HeroImage />
+      </div>
     </div>
   );
 }

@@ -15,14 +15,14 @@
   },
   "home": {
     "whyChoose": "Why Choose Me",
-    "whyChooseDesc": "I create clean, performant, and visually stunning web applications with React, Vite, Tailwind, and GSAP.",
+    "whyChooseDesc": "I bridge the gap between complex engineering and intuitive design, delivering high-performance solutions that scale with your business.",
     "features": {
       "performance": "Performance",
       "performanceDesc": "Optimized UI with smooth animations.",
-      "scalability": "Scalability",
-      "scalabilityDesc": "Modular and maintainable codebase.",
-      "design": "Design",
-      "designDesc": "Modern and user-focused design systems."
+      "scalability": "Future-Proof Architecture",
+      "scalabilityDesc": "Clean, modular code built for long-term maintenance and seamless feature expansion.",
+      "design": "User-Centric Design",
+      "designDesc": "Crafting modern, pixel-perfect interfaces that prioritize accessibility and engagement."
     }
   },
   "projects": {

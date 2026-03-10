@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useLayoutEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { skillGroups } from "@/constant/skills";
 import { SkillMarquee } from "../anim/SkillMarquee";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const SkillsSection = ({
   innerRef,
@@ -9,57 +13,140 @@ const SkillsSection = ({
   innerRef: React.RefObject<HTMLDivElement>;
 }) => {
   const { t } = useTranslation();
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const getArray = (s: string) => s.split(", ");
   const formatText = (s: string) => s.split(", ").join(" • ");
 
   const colors = [
-    { text: "text-cyan-400/80 dark:text-cyan-400/30", accent: "text-cyan-400", bg: "bg-cyan-400" },
-    { text: "text-indigo-400/80 dark:text-indigo-400/30", accent: "text-indigo-400", bg: "bg-indigo-400" },
-    { text: "text-pink-400 dark:text-pink-400/30", accent: "text-pink-400", bg: "bg-pink-400" },
+    {
+      text: "text-cyan-400/80 dark:text-cyan-400/30",
+      accent: "text-cyan-400",
+      bg: "bg-cyan-400",
+      border: "border-cyan-400/20",
+    },
+    {
+      text: "text-indigo-400/80 dark:text-indigo-400/30",
+      accent: "text-indigo-400",
+      bg: "bg-indigo-400",
+      border: "border-indigo-400/20",
+    },
+    {
+      text: "text-pink-400 dark:text-pink-400/30",
+      accent: "text-pink-400",
+      bg: "bg-pink-400",
+      border: "border-pink-400/20",
+    },
   ];
+
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from(".mobile-skill-group", {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: ".mobile-grid",
+          start: "top 85%",
+        },
+      });
+
+      gsap.from(".desktop-row", {
+        width: 0,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".desktop-container",
+          start: "top 80%",
+        },
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <section
       ref={innerRef}
       className="py-12 md:py-32 bg-transparent overflow-hidden w-full flex flex-col items-center"
     >
-      <div className="px-6 mb-12 md:mb-20 w-full max-w-[1440px]">
-        <h2 className="text-4xl md:text-5xl font-header font-bold mb-20 text-center uppercase tracking-tight">
-          {t("skills.title")}
-        </h2>
-      </div>
+      <div ref={containerRef} className="w-full flex flex-col items-center">
+        <div className="px-6 mb-12 md:mb-20 w-full max-w-[1440px]">
+          <h2 className="text-4xl md:text-5xl font-header font-bold mb-10 md:mb-20 text-center uppercase tracking-tight">
+            {t("skills.title")}
+          </h2>
+        </div>
 
-      <div className="flex flex-col w-full border-t border-white/5">
-        {skillGroups.map((group, i) => {
-          const color = colors[i % colors.length];
-          const isEven = i % 2 === 1;
-
-          return (
-            <div key={i} className="relative w-full group">
-              <div
-                className={`absolute top-1 md:top-2 z-10 opacity-40 group-hover:opacity-100 transition-all duration-500
-                ${isEven ? "right-4 md:right-12 text-right" : "left-4 md:left-12"}`}
-              >
-                <span className="block text-[10px] md:text-[14px] font-mono uppercase tracking-[0.3em] mb-1">
-                  {t(group.key)}
-                </span>
+        <div className="w-full px-6 md:px-0">
+          {/* MOBILE */}
+          <div className="md:hidden grid grid-cols-1 gap-10 mobile-grid">
+            {skillGroups.map((group, i) => {
+              const color = colors[i % colors.length];
+              return (
                 <div
-                  className={`h-[1px] md:h-[2px] w-0 group-hover:w-full transition-all duration-500 ease-out ${color.bg} ${isEven ? "ml-auto" : ""}`}
-                />
-              </div>
+                  key={`mobile-${i}`}
+                  className="space-y-4 mobile-skill-group"
+                >
+                  <div className="flex items-center gap-3">
+                    <span className={`h-[2px] w-8 ${color.bg}`} />
+                    <span className="text-xs font-mono uppercase tracking-[0.3em] opacity-70">
+                      {t(group.key)}
+                    </span>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {getArray(group.skills).map((skill, idx) => (
+                      <span
+                        key={idx}
+                        className={`px-3 py-1 text-sm border ${color.border} ${color.accent} bg-white/5 rounded-sm`}
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          {/* DESKTOP */}
+          <div className="hidden md:flex flex-col w-full border-t border-white/5 desktop-container">
+            {skillGroups.map((group, i) => {
+              const color = colors[i % colors.length];
+              const isEven = i % 2 === 1;
 
-              <SkillMarquee
-                text={formatText(group.skills)}
-                skillsArray={getArray(group.skills)}
-                reverse={isEven}
-                speed={isEven ? 45 : 35}
-                className={color.text}
-                accentColor={color.accent}
-              />
-            </div>
-          );
-        })}
+              return (
+                <div
+                  key={`desktop-${i}`}
+                  className="relative w-full group desktop-row border-b border-white/5"
+                >
+                  <div
+                    className={`absolute top-2 z-10 opacity-40 group-hover:opacity-100 transition-all duration-500
+                    ${isEven ? "right-12 text-right" : "left-12"}`}
+                  >
+                    <span className="block text-[14px] font-mono uppercase tracking-[0.3em] mb-1">
+                      {t(group.key)}
+                    </span>
+                    <div
+                      className={`h-[2px] w-0 group-hover:w-full transition-all duration-500 ease-out ${color.bg} ${isEven ? "ml-auto" : ""}`}
+                    />
+                  </div>
+
+                  <SkillMarquee
+                    text={formatText(group.skills)}
+                    skillsArray={getArray(group.skills)}
+                    reverse={isEven}
+                    speed={isEven ? 45 : 35}
+                    className={color.text}
+                    accentColor={color.accent}
+                  />
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </section>
   );

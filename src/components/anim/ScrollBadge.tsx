@@ -38,13 +38,13 @@ export default function ScrollBadge() {
   return (
     <div
       ref={badgeWrapperRef}
-      className="fixed bottom-10 left-10 z-[9999] cursor-pointer pointer-events-auto hidden md:block opacity-0 scale-50 transition-transform hover:scale-110 active:scale-95"
+      className="absolute bottom-22 md:bottom-10 left-2 md:left-10 z-[9999] cursor-pointer pointer-events-auto block opacity-0 scale-50 transition-transform hover:scale-110 active:scale-95"
       onClick={scrollToTop}
     >
       <div className="relative flex items-center justify-center">
-        <div className="absolute w-28 h-28 rounded-full bg-cyan-500/5 border border-cyan-500/20 backdrop-blur-sm shadow-[0_0_20px_rgba(6,182,212,0.1)]" />
+        <div className="absolute w-16 h-16 md:w-28 md:h-28 rounded-full bg-cyan-500/5 border border-cyan-500/20 backdrop-blur-sm shadow-[0_0_20px_rgba(6,182,212,0.1)]" />
 
-        <div ref={badgeRef} className="relative w-40 h-40">
+        <div ref={badgeRef} className="relative w-20 h-20 md:w-40 md:h-40">
           <svg
             viewBox="0 0 100 100"
             className="w-full h-full fill-cyan-500 drop-shadow-[0_0_2px_rgba(6,182,212,0.5)]"
@@ -56,7 +56,7 @@ export default function ScrollBadge() {
             />
             <text className="text-[9px] uppercase tracking-[1.8px] font-black">
               <textPath xlinkHref="#circlePath">
-                FULLSTACK — FRONTEND — DEVELOPER —
+                {` FULLSTACK — FRONTEND — DEVELOPER — `} 
               </textPath>
             </text>
           </svg>
