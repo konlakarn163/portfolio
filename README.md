@@ -4,7 +4,7 @@ Modern, High-Performance Personal Portfolio built with **React**, **GSAP**, and 
 
 ## 🔗 Live Demo
 
-**Check out the live site:** [portfolio-ivory-six.vercel.app](https://portfolio-ivory-six-fjdff3kq3q.vercel.app/)
+**Check out the live site:** [[portfolio-ivory-six.vercel.app](https://portfolio-ivory-six-fjdff3kq3q.vercel.app/)](https://portfolio.konlakarn.space/)
 
 ## 🚀 Tech Stack
 
