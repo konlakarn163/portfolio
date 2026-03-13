@@ -11,7 +11,7 @@
         "badge": "Community Platform",
         "desc": "Community-driven CMS for sharing engineering notes, product updates and collaborative stories.",
         "tech": "Next.js • Express • Supabase • TipTap",
-        "year": "2025",
+        "year": "2026",
         "liveUrl": "https://k-space-cms.konlakarn.space/"
       },
 
@@ -21,7 +21,7 @@
         "badge": "Personal Project",
         "desc": "Personal portfolio with dark mode, smooth scroll, GSAP animations, and i18n support.",
         "tech": "React • Vite • GSAP • Tailwind",
-        "year": "2025"
+        "year": "2026"
       }
     ]
   },
@@ -37,7 +37,7 @@
       "roleLabel": "Role",
       "role": "Fullstack Developer",
       "yearLabel": "Year",
-      "year": "2025",
+      "year": "2026",
       "live": "Live Demo",
       "serverNotice": "This project connects to a real online database. Response may be slow if the server is sleeping.",
       "features": {
@@ -62,7 +62,7 @@
       "roleLabel": "Role",
       "role": "Frontend Developer",
       "yearLabel": "Year",
-      "year": "2025",
+      "year": "2026",
       "youAreHere": "You are currently browsing this portfolio. This page is the live demo.",
       "highlights": {
         "title": "What's Inside",

@@ -11,7 +11,7 @@
         "badge": "Community Platform",
         "desc": "ระบบ CMS แบบ community-driven สำหรับแชร์บทความ engineering, อัปเดต product และเรื่องราวจากชุมชนนักพัฒนา",
         "tech": "Next.js • Express • Supabase • TipTap",
-        "year": "2025",
+        "year": "2026",
         "liveUrl": "https://k-space-cms.konlakarn.space/"
       },
 
@@ -21,7 +21,7 @@
         "badge": "Personal Project",
         "desc": "เว็บไซต์ส่วนตัวที่รองรับโหมดมืด การเลื่อนหน้าเว็บที่นุ่มนวล พร้อม GSAP Animation และระบบหลายภาษา",
         "tech": "React • Vite • GSAP • Tailwind",
-        "year": "2025"
+        "year": "2026"
       }
     ]
   },
@@ -37,7 +37,7 @@
       "roleLabel": "บทบาท",
       "role": "Fullstack Developer",
       "yearLabel": "ปี",
-      "year": "2025",
+      "year": "2026",
       "live": "ดูเว็บจริง",
       "serverNotice": "โปรเจกต์นี้เชื่อมต่อกับฐานข้อมูลจริงบนออนไลน์ อาจตอบสนองช้าหาก server กำลังหลับอยู่",
       "features": {
@@ -62,7 +62,7 @@
       "roleLabel": "บทบาท",
       "role": "Frontend Developer",
       "yearLabel": "ปี",
-      "year": "2025",
+      "year": "2026",
       "youAreHere": "คุณกำลังเรียกดูพอร์ตโฟลิโอนี้อยู่ หน้านี้คือ live demo",
       "highlights": {
         "title": "สิ่งที่อยู่ภายใน",
