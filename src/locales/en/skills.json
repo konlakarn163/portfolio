@@ -1,0 +1,15 @@
+{
+  "skills": {
+    "title": "Technical Expertise",
+    "categories": {
+      "frontend": "Frontend Development",
+      "backend": "Backend & Databases",
+      "tools": "Tools & Design"
+    },
+    "items": {
+      "frontend": "React.js, Next.js, Nuxt.js (v2/v3), Vue.js, TypeScript, Zustand, Redux, Tailwind CSS, SCSS, HTML5",
+      "backend": "Node.js, Express.js, SSMS (SQL Server), MongoDB, Firebase, RESTful API Integration, Socket.io",
+      "tools": "Git, Postman, Figma, Adobe XD, GSAP (ScrollTrigger), i18next, Socket.io"
+    }
+  }
+}

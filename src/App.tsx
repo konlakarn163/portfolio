@@ -2,6 +2,8 @@ import { useLayoutEffect, useRef } from "react";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Home from "@/pages/Home";
+import KSpaceCmsPage from "@/pages/projects/KSpaceCmsPage";
+import PortfolioPage from "@/pages/projects/PortfolioPage";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
@@ -74,6 +76,8 @@ export default function App() {
             <main className="flex-1">
               <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/project/k-space-cms" element={<KSpaceCmsPage />} />
+                <Route path="/project/portfolio" element={<PortfolioPage />} />
               </Routes>
             </main>
           </div>

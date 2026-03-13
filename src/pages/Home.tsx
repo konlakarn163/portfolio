@@ -9,6 +9,7 @@ import ExperienceSection from "@/components/panels/ExperienceSection";
 import AboutSection from "@/components/panels/AboutSection";
 import WhyChooseSection from "@/components/panels/WhyChooseSection";
 import ContactSection from "@/components/panels/ContactSection";
+import ProjectsSection from "@/components/panels/ProjectsSection";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -155,9 +156,11 @@ export default function Home() {
   return (
     <div
       ref={mainRef}
-      className="font-body overflow-x-hidden selection:bg-cyan-500/30"
+      className="font-body selection:bg-cyan-500/30"
     >
       <PanelHero />
+
+     
 
       <div className="relative">
         <section
@@ -165,8 +168,9 @@ export default function Home() {
           className="py-20 md:py-28 px-6 flex flex-col items-center justify-center bg-[color:var(--bg-alt)]"
         >
           <AboutSection />
-          <div className="w-full space-y-24 md:space-y-48 lg:space-y-52">
+          <div className="w-full space-y-16 md:space-y-24 lg:space-y-28">
             <SkillsSection innerRef={skillsRef} />
+             <ProjectsSection />
             <ExperienceSection innerRef={expRef} />
           </div>
         </section>

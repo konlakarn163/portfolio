@@ -1,0 +1,81 @@
+{
+  "projects": {
+    "title": "Projects",
+    "desc": "Scroll to explore my projects",
+    "view": "View Project",
+    "live": "Live Demo",
+    "list": [
+      {
+        "slug": "k-space-cms",
+        "title": "K-Space CMS",
+        "badge": "Community Platform",
+        "desc": "Community-driven CMS for sharing engineering notes, product updates and collaborative stories.",
+        "tech": "Next.js • Express • Supabase • TipTap",
+        "year": "2025",
+        "liveUrl": "https://k-space-cms.konlakarn.space/"
+      },
+
+      {
+        "slug": "portfolio",
+        "title": "Portfolio Website",
+        "badge": "Personal Project",
+        "desc": "Personal portfolio with dark mode, smooth scroll, GSAP animations, and i18n support.",
+        "tech": "React • Vite • GSAP • Tailwind",
+        "year": "2025"
+      }
+    ]
+  },
+  "projectPages": {
+    "kSpaceCms": {
+      "back": "Back to Projects",
+      "badge": "Community Platform",
+      "title": "K-Space CMS",
+      "tagline": "Community for Builders, Thinkers and Creators.",
+      "desc": "A community-driven CMS platform built with Next.js, Express, and Supabase. Designed for developers and creators to share engineering notes, product updates, and collaborative stories in one unified space.",
+      "techLabel": "Tech Stack",
+      "tech": "Next.js • Express • Supabase • TipTap",
+      "roleLabel": "Role",
+      "role": "Fullstack Developer",
+      "yearLabel": "Year",
+      "year": "2025",
+      "live": "Live Demo",
+      "serverNotice": "This project connects to a real online database. Response may be slow if the server is sleeping.",
+      "features": {
+        "title": "Key Features",
+        "list": [
+          "Rich text editing with TipTap editor",
+          "Authentication & user management via Supabase",
+          "Tagging and content filtering system",
+          "Responsive design with light/dark mode",
+          "Community-driven content creation & collaboration"
+        ]
+      }
+    },
+    "portfolio": {
+      "back": "Back to Projects",
+      "badge": "Personal Project",
+      "title": "Portfolio",
+      "tagline": "Designed, built and shipped by me.",
+      "desc": "A personal portfolio built with React, Vite, TypeScript and GSAP. Features smooth scroll, horizontal pin scroll, entrance animations, light/dark mode and full EN/TH bilingual support. Everything you see on this page is custom-crafted from scratch.",
+      "techLabel": "Tech Stack",
+      "tech": "React • Vite • TypeScript • GSAP • Tailwind",
+      "roleLabel": "Role",
+      "role": "Frontend Developer",
+      "yearLabel": "Year",
+      "year": "2025",
+      "youAreHere": "You are currently browsing this portfolio. This page is the live demo.",
+      "highlights": {
+        "title": "What's Inside",
+        "list": [
+          "GSAP ScrollSmoother for buttery smooth page scroll",
+          "Horizontal pin-scroll Projects section",
+          "Entrance animations with staggered reveals",
+          "Light / Dark mode via CSS custom properties",
+          "Full bilingual support — English and Thai",
+          "Responsive layout from mobile to widescreen",
+          "Component-scoped animation with GSAP context"
+        ]
+      }
+    }
+  }
+}

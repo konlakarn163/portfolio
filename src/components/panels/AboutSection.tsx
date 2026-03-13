@@ -51,7 +51,7 @@ export default function AboutSection() {
 
         <div className="flex items-center gap-4 md:gap-10 ml-0 md:ml-[-8vw] lg:ml-[8vw] 2xl:ml-[12vw] ">
           <div className="reveal-dash h-[2px] md:h-[3px] w-[10vw] md:w-[10vw] bg-[color:var(--fg)] opacity-50 hidden sm:block" />
-          <h2 className="hover-scale reveal-line text-[clamp(1.5rem,11vw,6rem)] font-bold uppercase leading-[0.9] tracking-tighter italic font-header text-cyan-500 dark:text-cyan-400">
+          <h2 className="hover-scale reveal-line text-[clamp(1.5rem,11vw,6rem)] font-bold uppercase leading-[0.9] tracking-tighter  font-header text-cyan-500 dark:text-cyan-400">
             {t("about.hero_2") || "Fullstack"}
           </h2>
         </div>

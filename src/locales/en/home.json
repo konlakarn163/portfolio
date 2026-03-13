@@ -1,0 +1,14 @@
+{
+  "home": {
+    "whyChoose": "Why Choose Me",
+    "whyChooseDesc": "I bridge the gap between complex engineering and intuitive design, delivering high-performance solutions that scale with your business.",
+    "features": {
+      "performance": "Performance",
+      "performanceDesc": "Optimized UI with smooth animations.",
+      "scalability": "Future-Proof Architecture",
+      "scalabilityDesc": "Clean, modular code built for long-term maintenance and seamless feature expansion.",
+      "design": "User-Centric Design",
+      "designDesc": "Crafting modern, pixel-perfect interfaces that prioritize accessibility and engagement."
+    }
+  }
+}
