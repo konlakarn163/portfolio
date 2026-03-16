@@ -5,7 +5,7 @@
       {
         "company": "METRO CAT",
         "role": "Fullstack & Frontend Developer",
-        "period": "2567 - ปัจจุบัน",
+        "period": "2025 - ปัจจุบัน",
         "details": [
           "พัฒนาและดูแลรักษา Web Application แบบ Full-stack โดยใช้ React และ Node.js (Express) เป็นหลัก",
           "จัดการ State ของระบบที่มีความซับซ้อนด้วย Zustand เพื่อเพิ่มประสิทธิภาพในการทำงานของ Frontend",
@@ -16,7 +16,7 @@
       {
         "company": "Top Cloud Co., Ltd.",
         "role": "Frontend Developer",
-        "period": "2567",
+        "period": "2024 - 2025",
         "details": [
           "พัฒนา Landing Page สำหรับโปรเจกต์ Tastematter, Sauce และ Maincourse โดยเน้นความสวยงามและการใช้งานที่ลื่นไหล",
           "พัฒนาและดูแลโปรเจกต์เว็บด้วย Nuxt 3 และ Tailwind CSS พร้อมจัดการระบบตรวจสอบข้อมูลด้วย Yup",
@@ -26,7 +26,7 @@
       {
         "company": "C.I.Group Public Company Limited",
         "role": "Fullstack & Frontend Developer",
-        "period": "2565 - 2567",
+        "period": "2022 - 2024",
         "details": [
           "พัฒนา Backend Services และปรับปรุง API Workflows สำหรับระบบภายในด้วย Node.js และ MongoDB",
           "สร้างและดูแลรักษา Web Application หลักโดยใช้ React.js, Redux และ Tailwind CSS",
