@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Home from "@/pages/Home";
 import KSpaceCmsPage from "@/pages/projects/KSpaceCmsPage";
+import KShopPage from "@/pages/projects/KShopPage";
 import PortfolioPage from "@/pages/projects/PortfolioPage";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -77,6 +78,7 @@ export default function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/project/k-space-cms" element={<KSpaceCmsPage />} />
+                <Route path="/project/k-shop" element={<KShopPage />} />
                 <Route path="/project/portfolio" element={<PortfolioPage />} />
               </Routes>
             </main>

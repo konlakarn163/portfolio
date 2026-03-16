@@ -6,6 +6,17 @@
     "live": "ดูเว็บจริง",
     "list": [
       {
+        "slug": "k-shop",
+        "title": "K-Shop",
+        "badge": "E-Commerce",
+        "desc": "เว็บไซต์ร้านค้าออนไลน์ดีไซน์เรียบสะอาด เน้นการดูสินค้าและประสบการณ์สั่งซื้อที่ลื่นไหล",
+        "tech": "React • Vite • Tailwind • TypeScript",
+        "year": "2026",
+        "liveUrl": "https://k-shop.konlakarn.space/",
+        "image": "/assets/images/projects/k-shop/k-shop-hero.png"
+      },
+
+      {
         "slug": "k-space-cms",
         "title": "K-Space CMS",
         "badge": "Community Platform",
@@ -26,6 +37,31 @@
     ]
   },
   "projectPages": {
+    "kShop": {
+      "back": "กลับไปหน้าโปรเจกต์",
+      "badge": "E-Commerce",
+      "title": "K-Shop",
+      "tagline": "หน้าร้านออนไลน์สมัยใหม่ รวดเร็ว และใช้งานลื่นไหล",
+      "desc": "K-Shop คือเว็บแอป e-commerce ที่พัฒนาด้วย React และ Vite โดยเน้นประสบการณ์การดูสินค้าให้ชัดเจน รองรับทุกหน้าจอ และทำให้เส้นทางการสั่งซื้อไหลลื่นตั้งแต่ค้นหาจนถึง checkout",
+      "techLabel": "Tech Stack",
+      "tech": "React • Vite • Tailwind • TypeScript",
+      "roleLabel": "บทบาท",
+      "role": "Frontend Developer",
+      "yearLabel": "ปี",
+      "year": "2026",
+      "live": "ดูเว็บจริง",
+      "features": {
+        "title": "ฟีเจอร์หลัก",
+        "list": [
+          "หน้าร้าน responsive รองรับทั้งมือถือและเดสก์ท็อป",
+          "โครงสร้างหน้าแสดงสินค้าอ่านง่ายและเลือกดูสะดวก",
+          "การนำทางและการโหลดหน้าที่รวดเร็วด้วย Vite",
+          "สถาปัตยกรรม frontend แบบ component-based",
+          "ดีไซน์สม่ำเสมอด้วย Tailwind CSS"
+        ]
+      }
+    },
+
     "kSpaceCms": {
       "back": "กลับไปหน้าโปรเจกต์",
       "badge": "Community Platform",

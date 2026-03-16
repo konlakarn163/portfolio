@@ -14,6 +14,7 @@ type Project = {
   tech: string;
   year?: string;
   liveUrl?: string;
+  image?: string;
 };
 
 const IMAGE_MAP: Record<string, string> = {
@@ -23,8 +24,14 @@ const IMAGE_MAP: Record<string, string> = {
 
 function ProjectCard({ project }: { project: Project }) {
   const { t } = useTranslation();
-  const hasPage = !!project.slug;
-  const imgSrc = project.slug ? (IMAGE_MAP[project.slug] ?? null) : null;
+  const hasInternalPage = !!project.slug;
+  const hasExternalLink = !!project.liveUrl;
+  const imgSrc = project.image ?? (project.slug ? (IMAGE_MAP[project.slug] ?? null) : null);
+  const ctaLabel = hasInternalPage
+    ? t("projects.view")
+    : hasExternalLink
+      ? t("projects.live")
+      : null;
 
   const techTags = project.tech
     .split("•")
@@ -51,6 +58,19 @@ function ProjectCard({ project }: { project: Project }) {
       </div>
 
       <div className="relative z-10 h-full p-6 group">
+        <div className="flex w-full lg:hidden h-full items-end">
+          <div className="space-y-1">
+            <h3 className="text-2xl font-header font-bold leading-tight text-slate-900 dark:text-white [text-shadow:0_2px_18px_rgba(0,0,0,0.35)]">
+              {project.title}
+            </h3>
+            {project.badge && (
+              <p className="text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-300 [text-shadow:0_1px_12px_rgba(0,0,0,0.3)]">
+                {project.badge}
+              </p>
+            )}
+          </div>
+        </div>
+
         <div className="hidden w-full lg:flex h-full items-end">
           <div className="space-y-3">
             <h3 className="text-3xl font-header font-bold leading-tight text-slate-900 dark:text-white group-hover:text-white transition-colors duration-300 [text-shadow:0_2px_18px_rgba(0,0,0,0.35)]">
@@ -77,9 +97,9 @@ function ProjectCard({ project }: { project: Project }) {
                 <span className="text-[11px] font-mono font-semibold text-slate-400 dark:text-slate-500 group-hover:text-white/65 uppercase tracking-wider transition-colors duration-300">
                   {project.year || "2026"}
                 </span>
-                {hasPage && (
+                {ctaLabel && (
                   <div className="flex items-center gap-2 text-sm font-bold text-cyan-600 dark:text-cyan-400 group-hover:text-cyan-300 group-hover:gap-3 transition-all [text-shadow:0_2px_14px_rgba(0,0,0,0.35)]">
-                    <span>{t("projects.view")}</span>
+                    <span>{ctaLabel}</span>
                     <svg
                       className="w-5 h-5"
                       fill="none"
@@ -106,10 +126,19 @@ function ProjectCard({ project }: { project: Project }) {
   const cardClass =
     "project-card block w-full md:w-auto aspect-[4/5] lg:aspect-auto lg:w-[420px] lg:h-full lg:max-h-[520px] shrink-0 no-blend-zone";
 
-  return hasPage ? (
+  return hasInternalPage ? (
     <Link to={`/project/${project.slug}`} className={cardClass}>
       {cardContent}
     </Link>
+  ) : hasExternalLink ? (
+    <a
+      href={project.liveUrl}
+      target="_blank"
+      rel="noreferrer"
+      className={cardClass}
+    >
+      {cardContent}
+    </a>
   ) : (
     <div className={cardClass}>{cardContent}</div>
   );

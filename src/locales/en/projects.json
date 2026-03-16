@@ -6,6 +6,14 @@
     "live": "Live Demo",
     "list": [
       {
+        "slug": "portfolio",
+        "title": "Portfolio Website",
+        "badge": "Personal Project",
+        "desc": "Personal portfolio with dark mode, smooth scroll, GSAP animations, and i18n support.",
+        "tech": "React • Vite • GSAP • Tailwind",
+        "year": "2026"
+      },
+      {
         "slug": "k-space-cms",
         "title": "K-Space CMS",
         "badge": "Community Platform",
@@ -16,16 +24,43 @@
       },
 
       {
-        "slug": "portfolio",
-        "title": "Portfolio Website",
-        "badge": "Personal Project",
-        "desc": "Personal portfolio with dark mode, smooth scroll, GSAP animations, and i18n support.",
-        "tech": "React • Vite • GSAP • Tailwind",
-        "year": "2026"
+        "slug": "k-shop",
+        "title": "K-Shop",
+        "badge": "E-Commerce",
+        "desc": "Modern e-commerce storefront focused on clean product browsing and a fast shopping flow.",
+        "tech": "React • Vite • Tailwind • TypeScript",
+        "year": "2025",
+        "liveUrl": "https://k-shop.konlakarn.space/",
+        "image": "/assets/images/projects/k-shop/k-shop-hero.png"
       }
     ]
   },
   "projectPages": {
+    "kShop": {
+      "back": "Back to Projects",
+      "badge": "E-Commerce",
+      "title": "K-Shop",
+      "tagline": "A fast, modern storefront built for smooth shopping.",
+      "desc": "K-Shop is an e-commerce web app built with React and Vite, focused on clean browsing, responsive product presentation, and a smooth purchase journey from discovery to checkout.",
+      "techLabel": "Tech Stack",
+      "tech": "React • Vite • Tailwind • TypeScript",
+      "roleLabel": "Role",
+      "role": "Frontend Developer",
+      "yearLabel": "Year",
+      "year": "2025",
+      "live": "Live Demo",
+      "features": {
+        "title": "Key Features",
+        "list": [
+          "Responsive shopping UI across mobile and desktop",
+          "Clean product listing and browsing flow",
+          "Fast navigation and rendering with Vite",
+          "Modern component-based frontend architecture",
+          "Consistent visual system with Tailwind CSS"
+        ]
+      }
+    },
+
     "kSpaceCms": {
       "back": "Back to Projects",
       "badge": "Community Platform",
