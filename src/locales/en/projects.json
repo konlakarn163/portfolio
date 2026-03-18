@@ -6,14 +6,6 @@
     "live": "Live Demo",
     "list": [
       {
-        "slug": "portfolio",
-        "title": "Portfolio Website",
-        "badge": "Personal Project",
-        "desc": "Personal portfolio, smooth scroll, GSAP animations, and i18n support.",
-        "tech": "React • Vite • GSAP • Tailwind",
-        "year": "2026"
-      },
-      {
         "slug": "k-space-cms",
         "title": "K-Space CMS",
         "badge": "Community Platform",
@@ -32,6 +24,14 @@
         "year": "2025",
         "liveUrl": "https://k-shop.konlakarn.space/",
         "image": "/assets/images/projects/k-shop/k-shop-hero.png"
+      },
+      {
+        "slug": "portfolio",
+        "title": "Portfolio Website",
+        "badge": "Personal Project",
+        "desc": "Personal portfolio, smooth scroll, GSAP animations.",
+        "tech": "React • Vite • GSAP • Tailwind",
+        "year": "2026"
       }
     ]
   },
