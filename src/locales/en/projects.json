@@ -9,7 +9,7 @@
         "slug": "portfolio",
         "title": "Portfolio Website",
         "badge": "Personal Project",
-        "desc": "Personal portfolio with dark mode, smooth scroll, GSAP animations, and i18n support.",
+        "desc": "Personal portfolio, smooth scroll, GSAP animations, and i18n support.",
         "tech": "React • Vite • GSAP • Tailwind",
         "year": "2026"
       },
@@ -91,7 +91,7 @@
       "badge": "Personal Project",
       "title": "Portfolio",
       "tagline": "Designed, built and shipped by me.",
-      "desc": "A personal portfolio built with React, Vite, TypeScript and GSAP. Features smooth scroll, horizontal pin scroll, entrance animations, light/dark mode and full EN/TH bilingual support. Everything you see on this page is custom-crafted from scratch.",
+      "desc": "A personal portfolio built with React, Vite, TypeScript and GSAP. Features smooth scroll, horizontal pin scroll, entrance animations, and light/dark mode. Everything you see on this page is custom-crafted from scratch.",
       "techLabel": "Tech Stack",
       "tech": "React • Vite • TypeScript • GSAP • Tailwind",
       "roleLabel": "Role",
@@ -106,7 +106,7 @@
           "Horizontal pin-scroll Projects section",
           "Entrance animations with staggered reveals",
           "Light / Dark mode via CSS custom properties",
-          "Full bilingual support — English and Thai",
+          "English-only content setup",
           "Responsive layout from mobile to widescreen",
           "Component-scoped animation with GSAP context"
         ]

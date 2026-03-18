@@ -8,7 +8,7 @@
     },
     "items": {
       "frontend": "React.js, Next.js, Nuxt.js (v2/v3), Vue.js, TypeScript, Zustand, Redux, Tailwind CSS, SCSS, HTML5",
-      "backend": "Node.js, Express.js, SSMS (SQL Server), MongoDB, Firebase, RESTful API Integration, Socket.io",
+      "backend": "Node.js, Express.js, SSMS (SQL Server), MongoDB, Firebase, Supabase, RESTful API Integration, Socket.io",
       "tools": "Git, Postman, Figma, Adobe XD, GSAP (ScrollTrigger), i18next, Socket.io"
     }
   }

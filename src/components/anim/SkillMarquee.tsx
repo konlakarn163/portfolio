@@ -1,5 +1,28 @@
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
+import type { IconType } from "react-icons";
+import {
+  SiAdobexd,
+  SiExpress,
+  SiFigma,
+  SiFirebase,
+  SiGit,
+  SiMongodb,
+  SiMui,
+  SiNodedotjs,
+  SiNuxtdotjs,
+  SiPostman,
+  SiReact,
+  SiRedux,
+  SiSocketdotio,
+  SiSupabase,
+  SiTailwindcss,
+  SiTypescript,
+  SiVuedotjs,
+  SiJavascript,
+  SiMysql,
+} from "react-icons/si";
+import { FiDatabase, FiLink } from "react-icons/fi";
 
 type MarqueeProps = {
   text: string;
@@ -8,6 +31,30 @@ type MarqueeProps = {
   reverse?: boolean;
   className?: string;
   accentColor?: string;
+};
+
+const iconMap: Record<string, IconType> = {
+  "React.js": SiReact,
+  "Nuxt.js": SiNuxtdotjs,
+  "Vue.js": SiVuedotjs,
+  "Tailwind CSS": SiTailwindcss,
+  TypeScript: SiTypescript,
+  Redux: SiRedux,
+  Zustand: SiJavascript,
+  MUI: SiMui,
+  "Node.js": SiNodedotjs,
+  "Express.js": SiExpress,
+  "SSMS (SQL Server)": SiMysql,
+  MongoDB: SiMongodb,
+  Firebase: SiFirebase,
+  "Socket.io": SiSocketdotio,
+  Supabase: SiSupabase,
+  Git: SiGit,
+  Postman: SiPostman,
+  Figma: SiFigma,
+  "Adobe XD": SiAdobexd,
+  "RESTful API": FiLink,
+  "RESTful API Integration": FiLink,
 };
 
 export const SkillMarquee = ({
@@ -103,14 +150,20 @@ export const SkillMarquee = ({
         style={{ transform: "translateY(10px) scale(0.95)" }}
       >
         <div className="flex flex-wrap justify-center gap-2 md:gap-4 max-w-6xl">
-          {skillsArray.map((skill, idx) => (
-            <span
-              key={idx}
-              className={`px-3 py-1.5 md:px-6 md:py-3 rounded-full border border-white/10 bg-white/5 backdrop-blur-xl text-xs md:text-xl font-bold ${accentColor} shadow-2xl whitespace-nowrap`}
-            >
-              {skill.trim()}
-            </span>
-          ))}
+          {skillsArray.map((skill, idx) => {
+            const cleanSkill = skill.trim();
+            const Icon = iconMap[cleanSkill] ?? FiDatabase;
+
+            return (
+              <span
+                key={idx}
+                className={`inline-flex items-center gap-2 px-3 py-1.5 md:px-6 md:py-3 rounded-md border border-white/10 bg-white/5 backdrop-blur-xl text-xs md:text-xl font-bold ${accentColor} shadow-2xl whitespace-nowrap`}
+              >
+                <Icon className="text-sm md:text-base" />
+                {cleanSkill}
+              </span>
+            );
+          })}
         </div>
       </div>
     </div>

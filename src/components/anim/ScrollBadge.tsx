@@ -20,7 +20,7 @@ export default function ScrollBadge() {
 
       gsap.to(badgeRef.current, {
         rotation: 360,
-        duration: 8, 
+        duration: 8,
         repeat: -1,
         ease: "none",
       });
@@ -38,7 +38,7 @@ export default function ScrollBadge() {
   return (
     <div
       ref={badgeWrapperRef}
-      className="hover-scale absolute bottom-22 md:bottom-10 left-2 md:left-10 z-[9999] cursor-pointer pointer-events-auto block opacity-0 scale-50 transition-transform hover:scale-110 active:scale-95"
+      className="hover-scale absolute bottom-22 md:bottom-10 right-2 md:right-10 z-[9999] cursor-pointer pointer-events-auto block opacity-0 scale-50 transition-transform hover:scale-110 active:scale-95"
       onClick={scrollToTop}
     >
       <div className="relative flex items-center justify-center">
@@ -54,9 +54,9 @@ export default function ScrollBadge() {
               d="M 50, 50 m -38, 0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0"
               fill="transparent"
             />
-            <text className="text-[9px] uppercase tracking-[1.8px] font-black">
+            <text className="text-[9px] uppercase tracking-[1.65px] font-black">
               <textPath xlinkHref="#circlePath">
-                {` FULLSTACK — FRONTEND — DEVELOPER — `} 
+                {` FULLSTACK — FRONTEND — DEVELOPER —`} {' '}
               </textPath>
             </text>
           </svg>

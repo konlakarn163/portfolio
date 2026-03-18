@@ -9,7 +9,7 @@ export default function ContactSection() {
       <div className="max-w-4xl mx-auto px-6 space-y-10 md:space-y-16">
         <div className="overflow-hidden">
           <h2 className="hover-scale reveal-text-contact text-5xl md:text-7xl font-header font-black uppercase tracking-tighter leading-none">
-            Let's <span className="text-cyan-500">Connect</span>
+            Let&apos;s <span className="text-cyan-500">Connect</span>
           </h2>
         </div>
 

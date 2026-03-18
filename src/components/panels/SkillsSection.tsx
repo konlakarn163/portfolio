@@ -1,9 +1,32 @@
-import React, { useLayoutEffect, useRef } from "react";
+import React, { useLayoutEffect, useMemo, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { skillGroups } from "@/constant/skills";
 import { SkillMarquee } from "../anim/SkillMarquee";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import type { IconType } from "react-icons";
+import {
+  SiAdobexd,
+  SiExpress,
+  SiFigma,
+  SiFirebase,
+  SiGit,
+  SiMongodb,
+  SiMui,
+  SiNodedotjs,
+  SiNuxtdotjs,
+  SiPostman,
+  SiReact,
+  SiRedux,
+  SiSocketdotio,
+  SiSupabase,
+  SiTailwindcss,
+  SiTypescript,
+  SiVuedotjs,
+  SiJavascript,
+  SiMysql,
+} from "react-icons/si";
+import { FiDatabase, FiLink } from "react-icons/fi";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -17,6 +40,33 @@ const SkillsSection = ({
 
   const getArray = (s: string) => s.split(", ");
   const formatText = (s: string) => s.split(", ").join(" • ");
+
+  const iconMap = useMemo<Record<string, IconType>>(
+    () => ({
+      "React.js": SiReact,
+      "Nuxt.js": SiNuxtdotjs,
+      "Vue.js": SiVuedotjs,
+      "Tailwind CSS": SiTailwindcss,
+      TypeScript: SiTypescript,
+      Redux: SiRedux,
+      Zustand: SiJavascript,
+      MUI: SiMui,
+      "Node.js": SiNodedotjs,
+      "Express.js": SiExpress,
+      "SSMS (SQL Server)": SiMysql,
+      MongoDB: SiMongodb,
+      Firebase: SiFirebase,
+      "Socket.io": SiSocketdotio,
+      Supabase: SiSupabase,
+      Git: SiGit,
+      Postman: SiPostman,
+      Figma: SiFigma,
+      "Adobe XD": SiAdobexd,
+      "RESTful API": FiLink,
+      "RESTful API Integration": FiLink,
+    }),
+    [],
+  );
 
   const colors = [
     {
@@ -98,14 +148,19 @@ const SkillsSection = ({
                     </span>
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    {getArray(group.skills).map((skill, idx) => (
-                      <span
-                        key={idx}
-                        className={`px-3 py-1 text-sm border ${color.border} ${color.accent} bg-white/5 rounded-sm`}
-                      >
-                        {skill}
-                      </span>
-                    ))}
+                    {getArray(group.skills).map((skill, idx) => {
+                      const Icon = iconMap[skill.trim()] ?? FiDatabase;
+
+                      return (
+                        <span
+                          key={idx}
+                          className={`inline-flex items-center gap-1.5 px-3 py-1 text-sm border ${color.border} ${color.accent} bg-white/5 rounded-sm`}
+                        >
+                          <Icon className="text-xs" />
+                          {skill}
+                        </span>
+                      );
+                    })}
                   </div>
                 </div>
               );

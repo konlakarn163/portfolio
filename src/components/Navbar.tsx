@@ -1,6 +1,5 @@
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
-import LanguageSwitcher from "./LanguageSwitcher";
 import ThemeToggle from "./ThemeToggle";
 import { useNavigate } from "react-router-dom";
 
@@ -37,7 +36,6 @@ export default function Navbar() {
         </div>
         <div className="flex items-center gap-2">
           <ThemeToggle />
-          <LanguageSwitcher />
         </div>
       </div>
     </header>

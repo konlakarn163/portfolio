@@ -39,17 +39,6 @@ export default function HeroImage({
         ease: "power4.out",
         onComplete: () => ScrollTrigger.refresh(),
       });
-
-      gsap.to(containerRef.current, {
-        yPercent: 0,
-        ease: "none",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
     });
 
     return () => ctx.revert();
