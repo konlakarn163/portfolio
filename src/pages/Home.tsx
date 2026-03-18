@@ -154,13 +154,8 @@ export default function Home() {
   }, [t]);
 
   return (
-    <div
-      ref={mainRef}
-      className="font-body selection:bg-cyan-500/30"
-    >
+    <div ref={mainRef} className="font-body selection:bg-cyan-500/30">
       <PanelHero />
-
-     
 
       <div className="relative">
         <section
@@ -170,8 +165,10 @@ export default function Home() {
           <AboutSection />
           <div className="w-full space-y-16 md:space-y-24 lg:space-y-28">
             <SkillsSection innerRef={skillsRef} />
-             <ProjectsSection />
-            <ExperienceSection innerRef={expRef} />
+            <ProjectsSection />
+            <div className="lg:!mt-52">
+              <ExperienceSection innerRef={expRef} />
+            </div>
           </div>
         </section>
 

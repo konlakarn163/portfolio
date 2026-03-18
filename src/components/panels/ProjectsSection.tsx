@@ -22,7 +22,7 @@ const IMAGE_MAP: Record<string, string> = {
   portfolio: "/assets/images/projects/port/port-bg.png",
 };
 
-function ProjectCard({ project, index }: { project: Project; index: number }) {
+function ProjectCard({ project }: { project: Project }) {
   const { t } = useTranslation();
   const hasInternalPage = !!project.slug;
   const hasExternalLink = !!project.liveUrl;
@@ -39,8 +39,6 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
     .map((s) => s.trim())
     .filter(Boolean);
 
-  const isEvenIndex = index % 2 === 0;
-
   const image = imgSrc ? (
     <img
       src={imgSrc}
@@ -53,10 +51,10 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   );
 
   const content = (
-    <div className="flex flex-col justify-center h-full">
-      <div className="space-y-4">
+    <div className="flex flex-col justify-center h-full w-full px-8 md:px-14 lg:px-20 py-10 md:py-16">
+      <div className="space-y-4 max-w-2xl">
         <div>
-          <h2 className="text-4xl md:text-5xl font-bold text-[color:var(--fg)] mb-2">
+          <h2 className="hover-scale text-4xl md:text-5xl lg:text-6xl font-bold text-[color:var(--fg)] mb-2">
             {project.title}
           </h2>
           {project.badge && (
@@ -122,19 +120,13 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   );
 
   return (
-    <div className="py-20 border-t-2 border-dashed border-[color:var(--border)] project-card">
-      <div
-        className={`grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center ${isEvenIndex ? "" : "md:grid-cols-2"}`}
-      >
-        <div
-          className={`project-card-image aspect-sq md:aspect-square ${isEvenIndex ? "" : "md:order-2"}`}
-        >
+    <div className="project-slide w-full md:w-screen min-h-[85vh] md:h-screen shrink-0">
+      <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-[1.15fr_0.85fr] h-full md:pt-56 md:pb-8">
+        <div className="project-card-image h-[42vh] md:h-full">
           {image}
         </div>
 
-        <div
-          className={`project-card-content ${isEvenIndex ? "" : "md:order-1"}`}
-        >
+        <div className="project-card-content">
           {content}
         </div>
       </div>
@@ -144,68 +136,39 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
 export default function ProjectsSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation();
   const projects = t("projects.list", { returnObjects: true }) as Project[];
 
   useLayoutEffect(() => {
+    const section = sectionRef.current;
+    const track = trackRef.current;
+    if (!section || !track) return;
+
     const ctx = gsap.context(() => {
-      const items = gsap.utils.toArray<HTMLElement>(
-        sectionRef.current?.querySelectorAll(".project-item"),
-      );
+      const mm = gsap.matchMedia();
 
-      items.forEach((item, index) => {
-        const isEven = index % 2 === 0;
-        const imageEl = item.querySelector(
-          ".project-card-image",
-        ) as HTMLElement;
-        const contentEl = item.querySelector(
-          ".project-card-content",
-        ) as HTMLElement;
+      mm.add("(min-width: 768px)", () => {
+        const totalX = Math.max(0, track.scrollWidth - window.innerWidth);
 
-        if (!imageEl || !contentEl) return;
-
-        // Initial state - image slides from side, text slides from bottom
-        gsap.set(imageEl, {
-          opacity: 0,
-          x: isEven ? -100 : 100,
+        const tween = gsap.to(track, {
+          x: -totalX,
+          ease: "none",
+          scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            end: () => `+=${totalX}`,
+            pin: true,
+            scrub: 1,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+          },
         });
 
-        gsap.set(contentEl, {
-          opacity: 0,
-          y: 60,
-        });
-
-        // Create timeline for reveal animation
-        gsap
-          .timeline({
-            scrollTrigger: {
-              trigger: item,
-              start: "top 75%",
-              end: "top 25%",
-              scrub: 1.2,
-              invalidateOnRefresh: true,
-            },
-          })
-          .to(
-            imageEl,
-            {
-              x: 0,
-              opacity: 1,
-              duration: 1.2,
-              ease: "power3.out",
-            },
-            0,
-          )
-          .to(
-            contentEl,
-            {
-              y: 0,
-              opacity: 1,
-              duration: 1.2,
-              ease: "power3.out",
-            },
-            0.2,
-          );
+        return () => {
+          tween.scrollTrigger?.kill();
+          tween.kill();
+        };
       });
     }, sectionRef);
 
@@ -216,17 +179,29 @@ export default function ProjectsSection() {
     <section
       id="projects"
       ref={sectionRef}
-      className="py-12 md:py-20 px-6 md:px-16 lg:px-20"
+      className="relative isolate z-10"
     >
-      <div className="max-w-7xl mx-auto">
-        <h2 className="hover-scale text-4xl md:text-5xl font-header font-bold mb-10 md:mb-20 text-center uppercase tracking-tight">
+      <h2 className="hidden md:block absolute top-20 left-1/2 -translate-x-1/2 z-30 hover-scale text-4xl md:text-5xl font-header font-bold text-center uppercase tracking-tight">
+        {t("projects.title")}
+      </h2>
+
+      <div className="hidden md:block overflow-hidden">
+        <div ref={trackRef} className="flex w-max">
+          {projects.map((p, i) => (
+            <ProjectCard key={i} project={p} />
+          ))}
+        </div>
+      </div>
+
+      <div className="md:hidden px-6 py-12 space-y-10">
+        <h2 className="hover-scale text-4xl font-header font-bold text-center uppercase tracking-tight">
           {t("projects.title")}
         </h2>
 
-        <div className="space-y-0">
+        <div className="space-y-8">
           {projects.map((p, i) => (
-            <div key={i} className="project-item">
-              <ProjectCard project={p} index={i} />
+            <div key={i} className="border-t border-[color:var(--border)] pt-8">
+              <ProjectCard project={p} />
             </div>
           ))}
         </div>
