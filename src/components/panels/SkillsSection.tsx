@@ -196,7 +196,7 @@ const SkillsSection = ({
                       {stackIcons.map((Icon, idx) => (
                         <span
                           key={`stack-${i}-${idx}`}
-                          className={`${`z-[${idx + 1}]`} bg-white dark:bg-gray-950 shadow-xl  h-11 w-11 rounded-full border border-white/20  flex items-center justify-center ${idx !== 0 ? "-ml-3" : ""}`}
+                          className={`${`z-[${idx + 1}]`} bg-white dark:bg-gray-900 shadow-xl  h-11 w-11 rounded-full border border-white/20  flex items-center justify-center ${idx !== 0 ? "-ml-3" : ""}`}
                         >
                           <Icon className={`text-base ${color.accent}`} />
                         </span>

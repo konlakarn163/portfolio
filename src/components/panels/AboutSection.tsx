@@ -12,6 +12,8 @@ export default function AboutSection() {
   const heroThreeRef = useRef<HTMLHeadingElement>(null);
   const heroTwoPlayingRef = useRef(false);
   const heroTwoPlayedRef = useRef(false);
+  const heroThreePlayingRef = useRef(false);
+  const heroThreePlayedRef = useRef(false);
   const heroTwo = t("about.hero_2") || "Fullstack";
   const heroTwoDisplay =
     heroTwo.toLowerCase() === "fullstack"
@@ -72,7 +74,7 @@ export default function AboutSection() {
       if (heroThreeRef.current) {
         const chars = heroThreeRef.current.querySelectorAll(".hero-three-char");
 
-        gsap.fromTo(
+        const heroThreeTween = gsap.fromTo(
           chars,
           { x: 80, opacity: 0 },
           {
@@ -81,13 +83,32 @@ export default function AboutSection() {
             duration: 0.6,
             stagger: 0.04,
             ease: "power3.out",
-            scrollTrigger: {
-              trigger: heroThreeRef.current,
-              start: "top 88%",
-              toggleActions: "restart none none reset",
-            },
+            paused: true,
+            onStart: () => { heroThreePlayingRef.current = true; },
+            onComplete: () => { heroThreePlayingRef.current = false; },
           },
         );
+
+        const playHeroThree = () => {
+          if (heroThreePlayingRef.current || heroThreePlayedRef.current) return;
+          heroThreePlayedRef.current = true;
+          heroThreeTween.play(0);
+        };
+        const resetHeroThree = () => {
+          heroThreePlayingRef.current = false;
+          heroThreePlayedRef.current = false;
+          heroThreeTween.pause(0);
+          gsap.set(chars, { x: 80, opacity: 0 });
+        };
+
+        ScrollTrigger.create({
+          trigger: heroThreeRef.current,
+          start: "top 88%",
+          invalidateOnRefresh: true,
+          onEnter: playHeroThree,
+          onEnterBack: playHeroThree,
+          onLeaveBack: resetHeroThree,
+        });
       }
 
     }, containerRef);
@@ -120,10 +141,10 @@ export default function AboutSection() {
           </div>
         </div>
 
-        <div className="  ml-[4vw] md:ml-[6vw] mb-10 md:mb-16 text-right mt-4">
+        <div className="ml-[4vw] md:ml-[6vw] mb-10 md:mb-16 text-right mt-4">
           <h2
             ref={heroThreeRef}
-            className="hover-scale overflow-hidden   about-developer-effect rotate-4 text-[clamp(2.5rem,11vw,4rem)] font-bold uppercase leading-[0.9] tracking-tighter text-slate-700 dark:text-white"
+            className="hover-scale overflow-hidden about-developer-effect rotate-4 text-[clamp(2.5rem,11vw,4rem)] font-bold uppercase leading-[0.9] tracking-tighter text-slate-700 dark:text-white"
           >
             {heroThree.split("").map((char, index) => (
               <span key={`${char}-${index}`} className="hero-three-char inline-block">
