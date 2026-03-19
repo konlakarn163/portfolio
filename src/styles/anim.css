@@ -1,0 +1,91 @@
+@keyframes aboutAccentSweep {
+	0% {
+		background-position: 0% 50%;
+	}
+	100% {
+		background-position: 180% 50%;
+	}
+}
+
+@keyframes aboutSoftFloat {
+	0%,
+	100% {
+		transform: rotate(1.5deg) translateY(0px);
+	}
+	50% {
+		transform: rotate(1.5deg) translateY(-4px);
+	}
+}
+
+@keyframes aboutDashPulse {
+	0%,
+	100% {
+		opacity: 0.45;
+		transform: rotate(2deg) scaleX(0.95);
+	}
+	50% {
+		opacity: 0.9;
+		transform: rotate(0deg) scaleX(1);
+	}
+}
+
+.about-fullstack-effect {
+	color: transparent;
+	background-image: linear-gradient(
+		90deg,
+		var(--accent) 0%,
+		color-mix(in srgb, var(--fg) 45%, var(--accent) 55%) 38%,
+		var(--accent) 72%,
+		var(--accent) 100%
+	);
+	background-size: 190% 100%;
+	-webkit-background-clip: text;
+	background-clip: text;
+	animation: aboutAccentSweep 6.5s linear infinite;
+}
+
+@keyframes aboutCornerFrameFloat {
+	0%,
+	100% {
+		transform: rotate(-4deg) translateY(0);
+	}
+	50% {
+		transform: rotate(-4deg) translateY(-3px);
+	}
+}
+
+@keyframes aboutCornerTextPulse {
+	0%,
+	100% {
+		opacity: 0.96;
+	}
+	50% {
+		opacity: 1;
+	}
+}
+
+.about-corner-frame {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: clamp(1.2rem, 1.1vw, 0.8rem) clamp(0.7rem, 2.3vw, 1.8rem);
+	background-color: var(--accent);
+	color: var(--accent-fg);
+	animation: aboutCornerFrameFloat 3.2s ease-in-out infinite;
+}
+
+.about-corner-text {
+	color: var(--accent-fg);
+	text-shadow: 0 0 1px color-mix(in srgb, var(--accent-fg) 70%, transparent);
+	animation: aboutCornerTextPulse 2.2s ease-in-out infinite;
+}
+
+.about-developer-effect {
+	animation: aboutSoftFloat 3s ease-in-out infinite;
+}
+
+.about-dash-effect {
+	transform-origin: right center;
+	will-change: transform, opacity;
+	animation: aboutDashPulse 3s ease-in-out infinite;
+}

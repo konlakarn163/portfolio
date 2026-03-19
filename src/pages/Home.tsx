@@ -160,7 +160,7 @@ export default function Home() {
       <div className="relative">
         <section
           ref={aboutRef}
-          className="py-20 md:py-28 px-6 flex flex-col items-center justify-center bg-[color:var(--bg-alt)]"
+          className="py-20 md:py-28 flex flex-col items-center justify-center bg-[color:var(--bg-alt)]"
         >
           <AboutSection />
           <div className="w-full space-y-16 md:space-y-24 lg:space-y-28">

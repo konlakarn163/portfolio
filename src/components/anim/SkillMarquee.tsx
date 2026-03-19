@@ -1,4 +1,5 @@
-import { useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import gsap from "gsap";
 import type { IconType } from "react-icons";
 import {
@@ -65,10 +66,20 @@ export const SkillMarquee = ({
   className = "",
   accentColor = "text-white",
 }: MarqueeProps) => {
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
+  const miniWrapperRef = useRef<HTMLDivElement>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
+  const miniTl = useRef<gsap.core.Timeline | null>(null);
+  const cleanSkills = useMemo(
+    () => skillsArray.map((skill) => skill.trim()).filter(Boolean),
+    [skillsArray],
+  );
+  const loopSkills = useMemo(
+    () => [...cleanSkills, ...cleanSkills],
+    [cleanSkills],
+  );
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -77,11 +88,33 @@ export const SkillMarquee = ({
 
       const setupAnimation = () => {
         if (tl.current) tl.current.kill();
-        const xDist = wrapper.offsetWidth / 2;
+        if (miniTl.current) miniTl.current.kill();
+
+        const xDist = wrapper.scrollWidth / 2;
+        const fromX = reverse ? -xDist : 0;
+        const toX = reverse ? 0 : -xDist;
+
+        gsap.set(wrapper, { x: fromX });
 
         tl.current = gsap.timeline().to(wrapper, {
-          x: reverse ? xDist : -xDist,
+          x: toX,
           duration: speed,
+          ease: "none",
+          repeat: -1,
+        });
+
+        const miniWrapper = miniWrapperRef.current;
+        if (!miniWrapper) return;
+
+        const miniDist = miniWrapper.scrollWidth / 2;
+        const miniFromX = reverse ? 0 : -miniDist;
+        const miniToX = reverse ? -miniDist : 0;
+
+        gsap.set(miniWrapper, { x: miniFromX });
+
+        miniTl.current = gsap.timeline().to(miniWrapper, {
+          x: miniToX,
+          duration: Math.max(18, speed * 0.7),
           ease: "none",
           repeat: -1,
         });
@@ -101,71 +134,109 @@ export const SkillMarquee = ({
       });
 
       window.addEventListener("resize", setupAnimation);
+
+      return () => {
+        window.removeEventListener("resize", setupAnimation);
+      };
     }, containerRef);
 
     return () => {
+      tl.current?.kill();
+      miniTl.current?.kill();
       ctx.revert();
-      window.removeEventListener("resize", () => {});
     };
-  }, [speed, reverse, text]);
-
-  const handleEnter = () => {
-    tl.current?.pause();
-    gsap.to(gridRef.current, { opacity: 1, y: 0, scale: 1, duration: 0.4, ease: "back.out(1.7)" });
-  };
-
-  const handleLeave = () => {
-    tl.current?.play();
-    gsap.to(gridRef.current, { opacity: 0, y: 10, scale: 0.95, duration: 0.3, ease: "power2.in" });
-  };
+  }, [speed, reverse, text, cleanSkills]);
 
   return (
-    <div
-      ref={containerRef}
-      className="relative overflow-hidden py-6 md:py-10 select-none group border-b border-white/5 cursor-default"
-      onMouseEnter={handleEnter}
-      onMouseLeave={handleLeave}
-      onTouchStart={handleEnter}
-      onTouchEnd={handleLeave}
-    >
+    <>
       <div
-        ref={wrapperRef}
-        className={`inline-flex items-center gap-8 md:gap-12 w-max transition-all duration-500 group-hover:opacity-5 group-hover:blur-sm ${
-          reverse ? "-translate-x-1/2" : ""
-        }`}
+        ref={containerRef}
+        onClick={() => setIsPopupOpen(true)}
+        className="relative overflow-hidden py-8 md:py-10 pb-14 md:pb-16 select-none cursor-pointer"
       >
-        {[1, 2, 3, 4].map((i) => (
-          <span
-            key={i}
-            className={`text-[clamp(2rem,10vw,6rem)] uppercase tracking-tighter ${className}`}
-          >
-            {text} <span className="mx-4 md:mx-8 text-white/10">•</span>
-          </span>
-        ))}
-      </div>
-
-      <div
-        ref={gridRef}
-        className="absolute inset-0 opacity-0 pointer-events-none flex items-center justify-center px-4"
-        style={{ transform: "translateY(10px) scale(0.95)" }}
-      >
-        <div className="flex flex-wrap justify-center gap-2 md:gap-4 max-w-6xl">
-          {skillsArray.map((skill, idx) => {
-            const cleanSkill = skill.trim();
-            const Icon = iconMap[cleanSkill] ?? FiDatabase;
+        <div
+          ref={wrapperRef}
+          className="inline-flex items-center gap-3 md:gap-4 w-max"
+        >
+          {loopSkills.map((skill, idx) => {
+            const Icon = iconMap[skill] ?? FiDatabase;
 
             return (
               <span
-                key={idx}
-                className={`inline-flex items-center gap-2 px-3 py-1.5 md:px-6 md:py-3 rounded-md border border-white/10 bg-white/5 backdrop-blur-xl text-xs md:text-xl font-bold ${accentColor} shadow-2xl whitespace-nowrap`}
+                key={`${skill}-${idx}`}
+                className={`flex items-center gap-2 px-4 py-4 md:px-8 md:py-4 text-white dark:text-gray-900 text-[clamp(2rem,2vw,4rem)] ${className}`}
               >
-                <Icon className="text-sm md:text-base" />
-                {cleanSkill}
+                <div className="rounded-full p-4 dark:bg-gray-900 bg-gray-100">
+                  <Icon
+                    className={`text-[clamp(2rem,2vw,4rem)] ${accentColor}`}
+                  />
+                </div>
+                {skill}
               </span>
             );
           })}
         </div>
+
+        <div className="absolute left-0 right-0 bottom-2 md:bottom-3 overflow-hidden pointer-events-none">
+          <div
+            ref={miniWrapperRef}
+            className="inline-flex items-center gap-5 md:gap-6 w-max"
+          >
+            {[...cleanSkills, ...cleanSkills, ...cleanSkills].map((skill, idx) => (
+              <span
+                key={`mini-${skill}-${idx}`}
+                className="text-xs md:text-sm uppercase tracking-[0.2em] text-white/70 dark:text-black/70 whitespace-nowrap"
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
+        </div>
       </div>
-    </div>
+
+      {isPopupOpen &&
+        typeof document !== "undefined" &&
+        createPortal(
+          <div
+            className="fixed inset-0 z-[120] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4"
+            onClick={() => setIsPopupOpen(false)}
+          >
+            <div
+              className="relative z-[121] w-full max-w-2xl rounded-xl border border-white/15 bg-gray-900 dark:bg-white text-white dark:text-black p-5 md:p-7"
+              onClick={(event) => event.stopPropagation()}
+            >
+              <div className="flex items-center justify-between mb-4">
+                <h4 className="text-lg md:text-xl font-semibold uppercase tracking-wide">
+                  Skills List
+                </h4>
+                <button
+                  type="button"
+                  onClick={() => setIsPopupOpen(false)}
+                  className="h-9 w-9 rounded-full border border-white/20 dark:border-black/20 text-base"
+                >
+                  ×
+                </button>
+              </div>
+
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 max-h-[60vh] overflow-y-auto pr-1">
+                {cleanSkills.map((skill, idx) => {
+                  const Icon = iconMap[skill] ?? FiDatabase;
+
+                  return (
+                    <li
+                      key={`popup-skill-${skill}-${idx}`}
+                      className="flex items-center gap-2.5 rounded-lg border border-white/10 dark:border-black/10 px-3 py-2"
+                    >
+                      <Icon className="text-base" />
+                      <span className="text-sm md:text-base">{skill}</span>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          </div>,
+          document.body,
+        )}
+    </>
   );
 };

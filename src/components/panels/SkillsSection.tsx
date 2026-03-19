@@ -68,6 +68,13 @@ const SkillsSection = ({
     [],
   );
 
+  const defaultColor = {
+    text: "text-cyan-400/80 dark:text-cyan-400/30",
+    accent: "text-cyan-400",
+    bg: "bg-cyan-400",
+    border: "border-cyan-400/20",
+  };
+
   const colors = [
     {
       text: "text-cyan-400/80 dark:text-cyan-400/30",
@@ -135,7 +142,7 @@ const SkillsSection = ({
           {/* MOBILE */}
           <div className="md:hidden grid grid-cols-1 gap-10 mobile-grid">
             {skillGroups.map((group, i) => {
-              const color = colors[i % colors.length];
+              const color = colors[i % colors.length] ?? defaultColor;
               return (
                 <div
                   key={`mobile-${i}`}
@@ -169,34 +176,42 @@ const SkillsSection = ({
           {/* DESKTOP */}
           <div className="hidden md:flex flex-col w-full border-t border-white/5 desktop-container">
             {skillGroups.map((group, i) => {
-              const color = colors[i % colors.length];
-              const isEven = i % 2 === 1;
+              const color = colors[i % colors.length] ?? defaultColor;
+              const stackIcons = getArray(group.skills).map(
+                (skill) => iconMap[skill.trim()] ?? FiDatabase,
+              );
 
               return (
                 <div
                   key={`desktop-${i}`}
-                  className="hover-scale relative w-full group desktop-row border-b border-white/5"
+                  className={`hover-scale relative w-full group desktop-row border-b border-slate-700 dark:border-white/5 overflow-hidden bg-transparent ${i === 0 ? "border-t" : ""}`}
                 >
-                  <div
-                    className={`absolute top-2 z-10 opacity-40 group-hover:opacity-100 transition-all duration-500
-                    ${isEven ? "right-12 text-right" : "left-12"}`}
-                  >
-                    <span className="block text-[14px] font-mono uppercase tracking-[0.3em] mb-1">
+                  <div className="absolute inset-0 z-0 bg-gray-900 dark:bg-white origin-center scale-y-0 group-hover:scale-y-100 transition-transform duration-500 ease-out" />
+
+                  <div className="relative z-10 min-h-[190px] flex items-center gap-4 flex-col justify-center opacity-100 group-hover:opacity-0 transition-opacity duration-300">
+                    <h3 className="text-[clamp(1rem,8vw,2rem)] uppercase tracking-tight font-header font-bold text-center text-[color:var(--fg)]">
                       {t(group.key)}
-                    </span>
-                    <div
-                      className={`h-[2px] w-0 group-hover:w-full transition-all duration-500 ease-out ${color.bg} ${isEven ? "ml-auto" : ""}`}
-                    />
+                    </h3>
+                    <div className={`flex items-center`}>
+                      {stackIcons.map((Icon, idx) => (
+                        <span
+                          key={`stack-${i}-${idx}`}
+                          className={`${`z-[${idx + 1}]`} bg-white dark:bg-gray-950 shadow-xl  h-11 w-11 rounded-full border border-white/20  flex items-center justify-center ${idx !== 0 ? "-ml-3" : ""}`}
+                        >
+                          <Icon className={`text-base ${color.accent}`} />
+                        </span>
+                      ))}
+                    </div>
                   </div>
 
-                  <SkillMarquee
-                    text={formatText(group.skills)}
-                    skillsArray={getArray(group.skills)}
-                    reverse={isEven}
-                    speed={isEven ? 45 : 35}
-                    className={color.text}
-                    accentColor={color.accent}
-                  />
+                  <div className="absolute inset-0 z-20 flex items-center opacity-0 group-hover:opacity-100 [clip-path:inset(50%_0_50%_0)] group-hover:[clip-path:inset(0%_0_0%_0)] transition-[clip-path,opacity] duration-500 ease-out pointer-events-none group-hover:pointer-events-auto cursor-pointer">
+                    <SkillMarquee
+                      text={formatText(group.skills)}
+                      skillsArray={getArray(group.skills)}
+                      speed={20}
+                      accentColor={color.accent}
+                    />
+                  </div>
                 </div>
               );
             })}

@@ -50,6 +50,8 @@ export default function TextAnimated({
   ease = "power3.out",
 }: TextAnimatedProps) {
   const wrapRef = useRef<HTMLDivElement>(null);
+  const hasAnimatedRef = useRef(false);
+  const activeTweenRef = useRef<gsap.core.Tween | null>(null);
 
   const posClass = (() => {
     if (position === "custom") return "";
@@ -67,6 +69,8 @@ export default function TextAnimated({
   })();
 
   useLayoutEffect(() => {
+    if (once && hasAnimatedRef.current) return;
+
     const root = wrapRef.current;
     if (!root) return;
 
@@ -89,7 +93,7 @@ export default function TextAnimated({
       })();
 
       if (unit === "all") {
-        gsap.from(lines, {
+        activeTweenRef.current = gsap.from(lines, {
           ...fromVars,
           opacity: 0,
           duration,
@@ -126,7 +130,7 @@ export default function TextAnimated({
         });
       });
 
-      gsap.from(createdSpans, {
+      activeTweenRef.current = gsap.from(createdSpans, {
         ...fromVars,
         opacity: 0,
         duration,
@@ -137,7 +141,12 @@ export default function TextAnimated({
       });
     }, wrapRef);
 
-    return () => ctx.revert();
+    hasAnimatedRef.current = true;
+
+    return () => {
+      activeTweenRef.current?.kill();
+      ctx.revert();
+    };
   }, [direction, unit, distance, duration, delay, stagger, ease, once]);
 
   const safeChildren = isValidElement(children)
