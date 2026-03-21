@@ -1,4 +1,11 @@
-import { useLayoutEffect, useMemo, useRef, useState } from "react";
+import {
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+  type KeyboardEvent,
+  type MouseEvent as ReactMouseEvent,
+} from "react";
 import { createPortal } from "react-dom";
 import gsap from "gsap";
 import type { IconType } from "react-icons";
@@ -70,8 +77,12 @@ export const SkillMarquee = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const miniWrapperRef = useRef<HTMLDivElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
   const tl = useRef<gsap.core.Timeline | null>(null);
   const miniTl = useRef<gsap.core.Timeline | null>(null);
+  const popupTl = useRef<gsap.core.Timeline | null>(null);
+  const popupOriginRef = useRef({ x: 0, y: 0 });
   const cleanSkills = useMemo(
     () => skillsArray.map((skill) => skill.trim()).filter(Boolean),
     [skillsArray],
@@ -147,11 +158,160 @@ export const SkillMarquee = ({
     };
   }, [speed, reverse, text, cleanSkills]);
 
+  useLayoutEffect(() => {
+    if (!isPopupOpen) return;
+
+    const overlay = overlayRef.current;
+    const panel = panelRef.current;
+    if (!overlay || !panel) return;
+
+    const originX = popupOriginRef.current.x || window.innerWidth / 2;
+    const originY = popupOriginRef.current.y || window.innerHeight / 2;
+    const viewportCenterX = window.innerWidth / 2;
+    const viewportCenterY = window.innerHeight / 2;
+    const travelX = originX - viewportCenterX;
+    const travelY = originY - viewportCenterY;
+    const revealRadius = Math.hypot(
+      Math.max(originX, window.innerWidth - originX),
+      Math.max(originY, window.innerHeight - originY),
+    );
+
+    popupTl.current?.kill();
+    document.body.style.overflow = "hidden";
+
+    gsap.set(overlay, {
+      autoAlpha: 0,
+      clipPath: `circle(0px at ${originX}px ${originY}px)`,
+    });
+    gsap.set(panel, {
+      x: travelX,
+      y: travelY + 34,
+      scaleX: 0.16,
+      scaleY: 0.06,
+      opacity: 0.25,
+      filter: "blur(20px)",
+      transformOrigin: "50% 50%",
+    });
+
+    popupTl.current = gsap
+      .timeline({ defaults: { overwrite: true } })
+      .to(
+        overlay,
+        {
+          autoAlpha: 1,
+          clipPath: `circle(${revealRadius}px at ${originX}px ${originY}px)`,
+          duration: 0.55,
+          ease: "power3.out",
+        },
+        0,
+      )
+      .to(
+        panel,
+        {
+          x: 0,
+          y: 0,
+          scaleX: 1,
+          scaleY: 1,
+          opacity: 1,
+          filter: "blur(0px)",
+          duration: 0.78,
+          ease: "elastic.out(1, 0.7)",
+        },
+        0.04,
+      );
+
+    return () => {
+      popupTl.current?.kill();
+      document.body.style.overflow = "";
+    };
+  }, [isPopupOpen]);
+
+  const closePopup = () => {
+    const overlay = overlayRef.current;
+    const panel = panelRef.current;
+
+    if (!overlay || !panel) {
+      tl.current?.play();
+      miniTl.current?.play();
+      setIsPopupOpen(false);
+      return;
+    }
+
+    const originX = popupOriginRef.current.x || window.innerWidth / 2;
+    const originY = popupOriginRef.current.y || window.innerHeight / 2;
+    const viewportCenterX = window.innerWidth / 2;
+    const viewportCenterY = window.innerHeight / 2;
+
+    popupTl.current?.kill();
+    popupTl.current = gsap
+      .timeline({
+        defaults: { overwrite: true },
+        onComplete: () => {
+          tl.current?.play();
+          miniTl.current?.play();
+          setIsPopupOpen(false);
+        },
+      })
+      .to(
+        panel,
+        {
+          x: originX - viewportCenterX,
+          y: originY - viewportCenterY + 28,
+          scaleX: 0.16,
+          scaleY: 0.06,
+          opacity: 0.2,
+          filter: "blur(18px)",
+          duration: 0.3,
+          ease: "power2.in",
+        },
+        0,
+      )
+      .to(
+        overlay,
+        {
+          autoAlpha: 0,
+          clipPath: `circle(0px at ${originX}px ${originY}px)`,
+          duration: 0.3,
+          ease: "power2.in",
+        },
+        0,
+      );
+  };
+
+  const openPopupFromElement = (element: HTMLElement) => {
+    const bounds = element.getBoundingClientRect();
+
+    popupOriginRef.current = {
+      x: bounds.left + bounds.width / 2,
+      y: bounds.top + bounds.height / 2,
+    };
+
+    tl.current?.pause();
+    miniTl.current?.pause();
+    setIsPopupOpen(true);
+  };
+
+  const openPopupFromPoint = (x: number, y: number) => {
+    popupOriginRef.current = { x, y };
+
+    tl.current?.pause();
+    miniTl.current?.pause();
+    setIsPopupOpen(true);
+  };
+
+  const handleContainerClick = (event: ReactMouseEvent<HTMLDivElement>) => {
+    openPopupFromPoint(event.clientX, event.clientY);
+  };
+
+  
+
   return (
     <>
       <div
         ref={containerRef}
-        onClick={() => setIsPopupOpen(true)}
+        role="button"
+        tabIndex={0}
+        onClick={handleContainerClick}
         className="relative overflow-hidden py-8 md:py-10 pb-14 md:pb-16 select-none cursor-pointer"
       >
         <div
@@ -182,14 +342,16 @@ export const SkillMarquee = ({
             ref={miniWrapperRef}
             className="inline-flex items-center gap-5 md:gap-6 w-max"
           >
-            {[...cleanSkills, ...cleanSkills, ...cleanSkills].map((skill, idx) => (
-              <span
-                key={`mini-${skill}-${idx}`}
-                className="text-xs md:text-sm uppercase tracking-[0.2em] text-white/70 dark:text-black/70 whitespace-nowrap"
-              >
-                {skill}
-              </span>
-            ))}
+            {[...cleanSkills, ...cleanSkills, ...cleanSkills].map(
+              (skill, idx) => (
+                <span
+                  key={`mini-${skill}-${idx}`}
+                  className="text-xs md:text-sm uppercase tracking-[0.2em] text-white/70 dark:text-black/70 whitespace-nowrap"
+                >
+                  {skill}
+                </span>
+              ),
+            )}
           </div>
         </div>
       </div>
@@ -198,11 +360,13 @@ export const SkillMarquee = ({
         typeof document !== "undefined" &&
         createPortal(
           <div
+            ref={overlayRef}
             className="fixed inset-0 z-[120] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4"
-            onClick={() => setIsPopupOpen(false)}
+            onClick={closePopup}
           >
             <div
-              className="relative z-[121] w-full max-w-2xl rounded-xl border border-white/15 bg-gray-900 dark:bg-white text-white dark:text-black p-5 md:p-7"
+              ref={panelRef}
+              className="relative z-[121] w-full max-w-2xl rounded-xl border border-white/15 bg-gray-900 dark:bg-white text-white dark:text-black p-5 md:p-7 will-change-transform"
               onClick={(event) => event.stopPropagation()}
             >
               <div className="flex items-center justify-between mb-4">
@@ -211,7 +375,7 @@ export const SkillMarquee = ({
                 </h4>
                 <button
                   type="button"
-                  onClick={() => setIsPopupOpen(false)}
+                  onClick={closePopup}
                   className="h-9 w-9 rounded-full border border-white/20 dark:border-black/20 text-base"
                 >
                   ×
