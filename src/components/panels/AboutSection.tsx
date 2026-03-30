@@ -2,6 +2,7 @@ import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useTranslation } from "react-i18next";
+import FloatingLogos from "../FloatingLogos";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -120,10 +121,12 @@ export default function AboutSection() {
 
   return (
     <section
+      id="about"
       ref={containerRef}
       className=" relative py-16 md:py-0 md:min-h-screen  px-4 md:px-10 flex flex-col justify-center text-[color:var(--fg)] overflow-x-visible overflow-y-hidden transition-colors duration-500"
     >
-      <div className=" 2xl:max-w-[1440px] mx-auto w-full">
+      <FloatingLogos />
+      <div className=" relative z-10 2xl:max-w-[1440px] mx-auto w-full">
         {/* <div className="overflow-hidden mb-4">
           <h2 className="reveal-line text-[clamp(2.5rem,11vw,5rem)] font-bold uppercase leading-[0.9] tracking-tighter">
             {t("about.hero_1") || "Senior"}

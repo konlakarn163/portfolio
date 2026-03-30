@@ -4,6 +4,7 @@ import HeroTitle from "@/components/hero/HeroTitle";
 import LeftIntro from "@/components/hero/LeftIntro";
 import RightSocialRail from "@/components/hero/RightSocialRail";
 import HeroImage from "@/components/hero/HeroImage";
+import FloatingLogos from "@/components/FloatingLogos";
 import { ReactNode, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -95,7 +96,9 @@ export default function PanelHero() {
   ];
 
   return (
-    <div ref={sectionRef} className="w-full px-6 min-h-[100svh] container mx-auto flex items-center justify-center relative font-header pt-16 pb-24 md:pb-0">
+    <div ref={sectionRef} className="w-full px-6 min-h-[100svh] container mx-auto flex items-center justify-center relative font-header pt-16 pb-24 md:pb-0 overflow-hidden">
+      <FloatingLogos justify="end" className="translate-x-[15%] lg:translate-x-[10%] opacity-20 lg:opacity-30" />
+      
       <HeroTitle />
 
       <div ref={leftRef} onClick={toggleImage} className="cursor-pointer z-20 w-full">
@@ -119,3 +122,4 @@ export default function PanelHero() {
     </div>
   );
 }
+

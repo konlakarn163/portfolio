@@ -88,13 +88,9 @@ function ProjectCard({ project }: { project: Project }) {
             )}
             {ctaLabel && (
               <Link
-                to={
-                  hasInternalPage
-                    ? `/project/${project.slug}`
-                    : project.liveUrl || "#"
-                }
-                target={hasExternalLink ? "_blank" : undefined}
-                rel={hasExternalLink ? "noreferrer" : undefined}
+                to={`/project/${project.slug}`}
+                // target={hasExternalLink ? "_blank" : undefined}
+                // rel={hasExternalLink ? "noreferrer" : undefined}
                 className="flex items-center gap-2 text-sm font-bold text-[color:var(--accent)] hover:gap-3 transition-all group"
               >
                 <span>{ctaLabel}</span>
