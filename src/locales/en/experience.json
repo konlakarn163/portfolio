@@ -8,6 +8,8 @@
         "period": "2025 - Present",
         "details": [
           "Developing and maintaining full-stack web applications primarily using React and Node.js (Express).",
+          "Mentoring junior developers to design and implement robust architectures across the full stack.",
+          "Implementing real-time communication features, including chat and notifications, using WebSockets.",
           "Managing complex application states using Zustand to optimize frontend performance.",
           "Designing and optimizing database queries in SSMS (SQL Server) for enterprise-level applications.",
           "Efficiently integrating frontend components with backend APIs and contributing to scalable system architecture."
@@ -20,7 +22,8 @@
         "details": [
           "Developed high-performance landing pages for Tastematter, Sauce, and Maincourse.",
           "Built and maintained web projects using Nuxt 3, Tailwind CSS, and Yup for robust data validation.",
-          "Integrated payment gateways including Stripe.js and Omise to support e-commerce transactions."
+          "Integrated payment gateways including Stripe.js and Omise to support e-commerce transactions.",
+          "Optimized web performance and search visibility through SEO best practices and Google Tag Manager (GTM) integration."
         ]
       },
       {
